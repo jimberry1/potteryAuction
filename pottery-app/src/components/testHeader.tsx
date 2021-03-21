@@ -38,14 +38,13 @@ export const Header = () => {
         />
         <button
           type="submit"
-          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 bg-red-700 hover:bg-red-800focus:shadow-outline focus:outline-none"
+          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 bg-red-700 hover:bg-red-800 focus:shadow-outline focus:outline-none"
         >
           Subscribe
         </button>
       </form>
       <p className="max-w-md mb-10 text-xs text-gray-600 sm:text-sm md:text-center">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium.
+        Sign up to hear the latest news from our site
       </p>
       <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe2g0YveWq0zIrIz5z_pFU-S6_2oRs5gam475d7zfFb0MBgKAXu2SiEQaf1YWDx-K6KevS-J4&usqp=CAc"
