@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import cx from 'classnames';
-import { Header } from './components/testHeader';
+import { Switch, Route } from 'react-router';
+import LandingPage from './routes/landingPage';
+import ExplorePage from './routes/explorePage';
+import ArtPage from './routes/artPage';
+import ArtistPage from './routes/artistPage';
+import Navbar from './UI/navbar';
+import AccountPage from './routes/accountPage';
 
 function App() {
-  const [toggle, setToggle] = React.useState<boolean>(false);
-  console.log('toggle', toggle);
-
-  const buttonClasses = toggle
-    ? 'bg-red-500 hover:bg-red-500 transform scale-550'
-    : 'bg-blue-500 hover:bg-blue-500';
   return (
-    <div className="bg-gray-200 flex items-center justify-center h-screen">
-      {/* <button
-        className={`p-3 rounded-sm ${buttonClasses}`}
-        onClick={() => setToggle(!toggle)}
-      >
-        Toggle
-      </button> */}
-      {/* <div className="bg-blue-200 flex items-center margin-left-20">yoyo</div> */}
-      <Header />
+    <div>
+      <Navbar />
+      <div className="bg-gray-200 flex justify-center h-screen overflow-x-hidden overflow-y-scroll">
+        <Switch>
+          <Route path="/explore" component={ExplorePage} />
+          <Route path="/artwork" component={ArtPage} />
+          <Route path="/artist" component={ArtistPage} />
+          <Route path="/account" component={AccountPage} />
+          <Route path="/" component={LandingPage} />
+        </Switch>
+      </div>
     </div>
   );
 }
