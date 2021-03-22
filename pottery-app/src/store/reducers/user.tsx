@@ -3,12 +3,11 @@ import { updateObject } from '../storeUtilities';
 import { userType } from '../../types';
 
 const initialState: userType = {
-  uid: '',
-  forename: '',
-  personalInfo: null,
-  workoutProgrammeId: '',
-  email: '',
-  isPT: false,
+  firstName: '',
+  surname: '',
+  emailAddress: '',
+  artistUid: '',
+  isAdmin: false,
 };
 
 const setUser = (state: userType, action: any) => {
