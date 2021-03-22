@@ -1,8 +1,19 @@
-export const Header = () => {
+export interface LandingPageHeaderProperties {
+  pageInfo: LandingPageHeaderDetails;
+}
+
+export type LandingPageHeaderDetails = {
+  title: string;
+  subtitle: string;
+};
+
+export const Header: React.FunctionComponent<LandingPageHeaderProperties> = ({
+  pageInfo,
+}) => {
   return (
-    <div className="flex flex-col items-center justify-center max-w-2xl px-4 pt-16 mx-auto sm:max-w-xl md:max-w-2xl lg:pt-32 md:px-8">
+    <div className="flex flex-col items-center justify-center max-w-2xl px-4 pt-12 mx-auto sm:max-w-xl md:max-w-2xl lg:pt-12 md:px-8">
       <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+        <h2 className="mb-6 text-2xl font-semibold tracking-tighter text-black sm:text-6xl title-font text-center">
           <span className="relative inline-block">
             <svg
               viewBox="0 0 52 24"
@@ -21,13 +32,14 @@ export const Header = () => {
                 </pattern>
               </defs>
             </svg>
-            <span className="relative">Craft</span>
           </span>{' '}
-          Art Charity Auction Application
+          {pageInfo.title}
+          {/* Craft Art Charity Auction Application */}
         </h2>
         <p className="text-base text-gray-700 md:text-lg">
-          It's never been easier to buy the art you love knowing that the
-          proceeds are for a charity of your choice
+          {pageInfo.subtitle}
+          {/* It's never been easier to buy the art you love knowing that the
+          proceeds are for a charity of your choice */}
         </p>
       </div>
       <form className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
@@ -46,11 +58,11 @@ export const Header = () => {
       <p className="max-w-md mb-10 text-xs text-gray-600 sm:text-sm md:text-center">
         Sign up to hear the latest news from our site
       </p>
-      <img
+      {/* <img
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe2g0YveWq0zIrIz5z_pFU-S6_2oRs5gam475d7zfFb0MBgKAXu2SiEQaf1YWDx-K6KevS-J4&usqp=CAc"
         className="w-full mx-auto md:w-auto md:max-w-xs"
         alt=""
-      />
+      /> */}
     </div>
   );
 };
