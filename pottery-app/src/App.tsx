@@ -7,6 +7,7 @@ import ArtistPage from './routes/artistPage';
 import Navbar from './UI/navbar';
 import AccountPage from './routes/accountPage';
 import TestPage from './routes/testPage';
+import ResultsPage from './routes/resultsPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/artwork" component={ArtPage} />
           <Route path="/artist" component={ArtistPage} />
           <Route path="/account" component={AccountPage} />
+          <Route path="/results" component={ResultsPage} />
           <Route path="/test" component={TestPage} />
           <Route path="/" component={LandingPage} />
         </Switch>
