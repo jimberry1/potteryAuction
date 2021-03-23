@@ -12,6 +12,7 @@ import ArtContentWithArtist from '../components/tailwindComponents/artContentWit
 import ArtContentWithPrice from '../components/tailwindComponents/artContentWithPrice';
 import db from '../firebase';
 import { ARTWORK_TABLE } from '../utilities/firebaseQueryConfig';
+import ArtWithSectionsAndPrice from '../components/tailwindComponents/artWithSectionsAndPrice';
 
 export interface ArtPageProps {}
 
@@ -65,7 +66,8 @@ const ArtPage: React.SFC<ArtPageProps> = () => {
       <PageLoaderHoc loading={loading}>
         {/* <ArtComponent artwork={artwork} /> */}
         {/* <ArtContentWithArtist artwork={artwork} /> */}
-        <ArtContentWithPrice artwork={artwork} />
+        {/* <ArtContentWithPrice artwork={artwork} /> */}
+        <ArtWithSectionsAndPrice artwork={artwork} />
       </PageLoaderHoc>
     </div>
   );
