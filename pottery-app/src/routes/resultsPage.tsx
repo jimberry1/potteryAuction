@@ -1,12 +1,14 @@
 import ArtCard from '../components/tailwindComponents/artCard';
+import TestGenericArtContainer from '../containers/testGenericArtContainer';
 
 export interface ResultsPageProps {}
 
 const ResultsPage: React.SFC<ResultsPageProps> = () => {
   return (
-    <div>
+    <div style={{ width: '100vw', height: '100vh' }}>
       This is the results page
-      <ArtCard artworkId="zPuI9bPxhIXvmYddnnKY" />
+      {/* <ArtCard artworkId="zPuI9bPxhIXvmYddnnKY" /> */}
+      <TestGenericArtContainer />
     </div>
   );
 };
