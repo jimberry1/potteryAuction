@@ -1,4 +1,8 @@
 import { artworkType } from '../../types';
+import {
+  formatItemDescriptionForCard,
+  formatItemTitleForCard,
+} from '../../utilities/utilityFunctions';
 
 export interface ArtCardProps {
   artwork?: artworkType;
@@ -7,7 +11,7 @@ export interface ArtCardProps {
 
 const ArtCard: React.SFC<ArtCardProps> = ({ artwork, artworkId }) => {
   return (
-    <div style={{ maxWidth: 200, height: 300 }}>
+    <div className="m-2">
       <a
         href={`/artwork?artworkId=${artwork ? artworkId : ''}`}
         aria-label="View Item"
@@ -26,19 +30,14 @@ const ArtCard: React.SFC<ArtCardProps> = ({ artwork, artworkId }) => {
           <div className=" border border-t-0 rounded-b h-1/3">
             <div className="p-5 w-full">
               <h6 className="mb-2 font-semibold leading-5">
-                {artwork ? artwork.title : 'Default title'}
+                {artwork
+                  ? formatItemTitleForCard(artwork.title)
+                  : 'No title found'}
               </h6>
               <p className="text-sm text-gray-900">
                 {artwork
-                  ? artwork.description
-                      .substring(
-                        0,
-                        artwork.description.length < 50
-                          ? artwork.description.length
-                          : 50
-                      )
-                      .concat('...')
-                  : 'Default item description'}
+                  ? formatItemDescriptionForCard(artwork.description)
+                  : 'No description found...'}
               </p>
             </div>
           </div>
