@@ -7,7 +7,7 @@ const ExplorePage: React.SFC<ExplorePageProps> = () => {
   return (
     <div>
       <ExplorePageHeader />
-      <TwoWindowPicture />
+      {/* <TwoWindowPicture /> */}
     </div>
   );
 };
