@@ -36,6 +36,13 @@ export type aristType = {
   userId: string;
   profileDescription: string;
 };
+
+export type DropdownMenuOptionType = {
+  id: string;
+  label: string;
+  value: string;
+  selected: boolean;
+};
 /**
  * Types
  *
