@@ -6,10 +6,13 @@ import { LANDING_PAGE_INFO_DOC } from '../utilities/firebaseQueryConfig';
 import Firebase from 'firebase';
 import PageLoader from '../UI/pageLoader';
 import PageLoaderHoc from '../utilities/hoc/pageLoaderHoc';
-
+import ExplorePageHeader from '../components/tailwindComponents/explorePageHeader';
+import TwoWindowPicture from '../components/tailwindComponents/twoWindowPicture';
+import { useHistory } from 'react-router';
 export interface LandingPageProps {}
 
 const LandingPage: React.FunctionComponent<LandingPageProps> = () => {
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
   const [landingPageInfo, setLandingPageInfo]: any = useState(null);
   useEffect(() => {
@@ -22,11 +25,20 @@ const LandingPage: React.FunctionComponent<LandingPageProps> = () => {
       }
     );
   }, []);
+
+  const exploreButtonClickedHandler = (buttonKey: string) => {
+    history.push(`/results?category=${buttonKey}`);
+  };
+
   return (
     <div>
       <PageLoaderHoc loading={loading}>
         <Header pageInfo={landingPageInfo} />
-        <LargeImage />
+        <TwoWindowPicture
+          buttonClickedHandler={(buttonKey: string) =>
+            exploreButtonClickedHandler(buttonKey)
+          }
+        />
       </PageLoaderHoc>
     </div>
   );
