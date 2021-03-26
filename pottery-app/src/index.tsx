@@ -9,10 +9,12 @@ import userReducer from './store/reducers/user';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
+import searchReducer from './store/reducers/search';
 
 const rootReducer = combineReducers({
   // auth: authReducer,
   user: userReducer,
+  search: searchReducer,
   // admin: adminReducer,
   // Add other reducers here if and when they are needed
 });
