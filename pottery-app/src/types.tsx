@@ -37,11 +37,26 @@ export type aristType = {
   profileDescription: string;
 };
 
+// Reducer state profiles
+
+export type searchStateType = {
+  priceSelection: string;
+  materialSelection: string;
+  sizeSelection: string;
+};
+
 export type DropdownMenuOptionType = {
   id: string;
   label: string;
   value: string;
-  selected: boolean;
+};
+
+export type DropDownMenuType = {
+  id: string;
+  menuOptions: DropdownMenuOptionType[];
+  filterCategoryName: string;
+  dispatchUpdateFunction: (newFilterValue: string) => void;
+  getDesiredStateFromSearchSelector: (searchState: searchStateType) => string;
 };
 /**
  * Types
