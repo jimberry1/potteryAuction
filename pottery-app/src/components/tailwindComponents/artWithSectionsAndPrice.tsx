@@ -44,8 +44,8 @@ const ArtWithSectionsAndPrice: React.SFC<ArtWithSectionsAndPriceProps> = ({
               <span className="ml-auto text-gray-900">30 cm</span>
             </div>
             <div className="flex border-t border-b mb-6 border-gray-400 py-2">
-              <span className="text-gray-500">Quantity</span>
-              <span className="ml-auto text-gray-900">4</span>
+              <span className="text-gray-500">Views</span>
+              <span className="ml-auto text-gray-900">{artwork.views}</span>
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">
