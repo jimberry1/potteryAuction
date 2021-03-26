@@ -1,17 +1,11 @@
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useState } from 'react';
+import { DropdownMenuOptionType } from '../../types';
 export interface DropDownProps {
-  menuOptions: [
-    {
-      id: string;
-      label: string;
-      value: string;
-      selected: boolean;
-      index: number;
-    }
-  ];
+  menuOptions: DropdownMenuOptionType[];
   menuOptionSelected: (menuOption: string) => void;
   filterTitle: string;
+  selectedOption: string;
 }
 
 const toggleVariants = {
@@ -29,6 +23,7 @@ const DropDown: React.FunctionComponent<DropDownProps> = ({
   menuOptions,
   menuOptionSelected,
   filterTitle,
+  selectedOption,
 }) => {
   const [show, setShow] = useState(false);
   return (
@@ -45,7 +40,8 @@ const DropDown: React.FunctionComponent<DropDownProps> = ({
           aria-haspopup="true"
         >
           {menuOptions.find(
-            (menuOption) => menuOption.selected && menuOption.index > 0
+            (menuOption) =>
+              menuOption.value && menuOption.value == selectedOption
           )?.label || filterTitle}
           <svg
             className="-mr-1 ml-2 h-5 w-5"
@@ -78,7 +74,7 @@ const DropDown: React.FunctionComponent<DropDownProps> = ({
             >
               <div className="py-1" role="none">
                 {menuOptions
-                  .filter((menuItem) => !menuItem.selected)
+                  .filter((menuItem) => menuItem.value !== selectedOption)
                   .map((menuOption) => {
                     return (
                       <div
