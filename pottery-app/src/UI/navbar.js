@@ -5,7 +5,6 @@ const Navbar = () => {
   const history = useHistory();
   return (
     <TailwindNavbar
-      style={{ outline: 'none' }}
       brand={
         <img
           src="https://media.discordapp.net/attachments/694834406493257762/729067815499202651/matthew_border.png"
@@ -14,7 +13,7 @@ const Navbar = () => {
           alt="Brand logo"
         />
       }
-      className="py-1"
+      className="py-1 z-50"
     >
       <nav>
         <ul className="items-center justify-between pt-4 text-base lg:flex lg:pt-0">
