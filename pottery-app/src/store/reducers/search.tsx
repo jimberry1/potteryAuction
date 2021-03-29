@@ -6,6 +6,7 @@ const initialState: searchStateType = {
   materialSelection: '',
   priceSelection: '',
   sizeSelection: '',
+  artType: '',
 };
 
 const setPriceFilter = (state: any, action: any) => {
@@ -20,6 +21,10 @@ const setSizeFilter = (state: any, action: any) => {
   return updateObject(state, { sizeSelection: action.filter });
 };
 
+const setArtTypeFilter = (state: any, action: any) => {
+  return updateObject(state, { artType: action.artType });
+};
+
 const searchReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case actionTypes.SET_PRICE_FILTER:
@@ -28,6 +33,8 @@ const searchReducer = (state = initialState, action: any) => {
       return setMaterialFilter(state, action);
     case actionTypes.SET_SIZE_FILTER:
       return setSizeFilter(state, action);
+    case actionTypes.SET_ART_TYPE_FILTER:
+      return setArtTypeFilter(state, action);
     default:
       return state;
   }

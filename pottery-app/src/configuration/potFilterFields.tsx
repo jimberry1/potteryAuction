@@ -1,10 +1,54 @@
 import {
+  updateArtType,
   updateMaterial,
   updatePrice,
   updateSize,
 } from '../store/actions/searchActions';
 import { DropDownMenuType } from '../types';
-import { CLAY, PORCLEAN, WOOD } from './staticVariableNames/artVariableNames';
+import {
+  CLAY,
+  PATINING,
+  PORCLEAN,
+  POTTERY,
+  PRINTS,
+  WOOD,
+  WOODWORK,
+} from './staticVariableNames/artVariableNames';
+
+export const artTypeSelection: DropDownMenuType = {
+  id: '83487348894jf9349',
+
+  filterCategoryName: 'Type',
+  dispatchUpdateFunction: updateArtType,
+  getDesiredStateFromSearchSelector: (searchState) => searchState.artType,
+  menuOptions: [
+    {
+      id: 'jfdj239982',
+      label: 'No filter',
+      value: '',
+    },
+    {
+      id: '43992irio2',
+      label: POTTERY,
+      value: POTTERY,
+    },
+    {
+      id: '345k3jkl53',
+      label: PATINING,
+      value: PATINING,
+    },
+    {
+      id: '3535klj35jkl35kjl',
+      label: PRINTS,
+      value: PRINTS,
+    },
+    {
+      id: '4564564t',
+      label: WOODWORK,
+      value: WOODWORK,
+    },
+  ],
+};
 
 export const materialSelection: DropDownMenuType = {
   id: '980239843929804890423890',
@@ -22,17 +66,17 @@ export const materialSelection: DropDownMenuType = {
     {
       id: '123128123230',
       label: CLAY,
-      value: 'C',
+      value: CLAY,
     },
     {
       id: '234234253252',
       label: PORCLEAN,
-      value: 'P',
+      value: PORCLEAN,
     },
     {
       id: '3453453534',
       label: WOOD,
-      value: 'W',
+      value: WOOD,
     },
   ],
 };
@@ -97,6 +141,7 @@ export const sizeSelection: DropDownMenuType = {
 };
 
 export const artSearchFilterFields: DropDownMenuType[] = [
+  artTypeSelection,
   materialSelection,
   priceSelection,
   sizeSelection,
