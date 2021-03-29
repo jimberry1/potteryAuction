@@ -4,14 +4,10 @@ import {
   addViewToArtworkWhenLoaded,
   fetchArtworkByArtworkId,
 } from '../utilities/firebaseQueries';
-import Firebase from 'firebase';
-import { artworkType } from '../types';
 import PageLoaderHoc from '../utilities/hoc/pageLoaderHoc';
 import ArtComponent from '../components/tailwindComponents/artComponent';
 import ArtContentWithArtist from '../components/tailwindComponents/artContentWithArtist';
 import ArtContentWithPrice from '../components/tailwindComponents/artContentWithPrice';
-import db from '../firebase';
-import { ARTWORK_TABLE } from '../utilities/firebaseQueryConfig';
 import ArtWithSectionsAndPrice from '../components/tailwindComponents/artWithSectionsAndPrice';
 
 export interface ArtPageProps {}
@@ -26,10 +22,11 @@ const ArtPage: React.SFC<ArtPageProps> = () => {
     artistName: '',
     artistUid: '',
     auctionId: '',
-    artCategory: [],
+    artCategory: '',
     artMaterials: [],
     photosURL: [],
     views: 0,
+    size: '',
   });
 
   useEffect(() => {

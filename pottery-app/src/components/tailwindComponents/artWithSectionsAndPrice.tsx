@@ -1,5 +1,6 @@
 import { artworkType } from '../../types';
-
+import { motion } from 'framer-motion';
+import { artPageFadeInVariants } from '../../styles/animations';
 export interface ArtWithSectionsAndPriceProps {
   artwork: artworkType;
 }
@@ -10,7 +11,12 @@ const ArtWithSectionsAndPrice: React.SFC<ArtWithSectionsAndPriceProps> = ({
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-2 md:py-24 mx-auto">
-        <div className="lg:w-4/5 mx-auto flex flex-wrap">
+        <motion.div
+          className="lg:w-4/5 mx-auto flex flex-wrap"
+          variants={artPageFadeInVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <img
             alt="ecommerce"
             className="lg:w-1/3 w-full lg:h-auto h-64 object-cover object-center rounded"
@@ -68,7 +74,7 @@ const ArtWithSectionsAndPrice: React.SFC<ArtWithSectionsAndPriceProps> = ({
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
