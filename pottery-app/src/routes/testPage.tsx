@@ -12,10 +12,11 @@ const TestPage: React.FunctionComponent<TestPageProps> = () => {
       artistName: 'jim',
       artistUid: 'testUID',
       auctionId: 'auctionUID',
-      artCategory: ['pots', 'art'],
-      artMaterials: ['clay', 'butter'],
+      artCategory: 'Pottery',
+      artMaterials: ['Clay', 'butter'],
       photosURL: ['https://source.unsplash.com/random'],
       views: 0,
+      size: 'M',
     };
     addArtworkToArtworkDatabaseTable(dummyArtwork)
       .catch((err) => console.log(err))
