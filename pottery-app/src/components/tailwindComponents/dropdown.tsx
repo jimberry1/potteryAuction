@@ -28,7 +28,7 @@ const DropDown: React.FunctionComponent<DropDownProps> = ({
   const [show, setShow] = useState(false);
   return (
     <div
-      className="relative inline-block text-left focus:outline-none pl-40 w-72"
+      className="relative inline-block text-left focus:outline-none w-36 m-2 z-50"
       onClick={() => setShow((curVal) => !curVal)}
     >
       <div>
@@ -67,7 +67,7 @@ const DropDown: React.FunctionComponent<DropDownProps> = ({
             exit="hidden"
           >
             <div
-              className="origin-top-right absolute right-0 mt-2 w-48 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="options-menu"
