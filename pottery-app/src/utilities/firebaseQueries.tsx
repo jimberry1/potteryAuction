@@ -31,8 +31,6 @@ export const addViewToArtworkWhenLoaded = (artworkId: string) => {
 export const createCustomArtQuery = async (searchFilters: searchStateType) => {
   let dbQuery = db.collection(ARTWORK_TABLE);
   if (searchFilters.materialSelection) {
-    const materialArrayForWorkaround = [searchFilters.materialSelection];
-    console.log(materialArrayForWorkaround);
     dbQuery = addArtMaterialFilter(dbQuery, searchFilters.materialSelection);
   }
   if (searchFilters.sizeSelection) {
