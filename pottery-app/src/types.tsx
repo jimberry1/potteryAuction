@@ -13,10 +13,11 @@ export type artworkType = {
   artistName: string;
   artistUid: string;
   auctionId: string;
-  artCategory: string[];
+  artCategory: string;
   artMaterials: string[];
   views: number;
   photosURL: string[];
+  size: string;
 };
 
 export type auctionType = {
@@ -43,6 +44,7 @@ export type searchStateType = {
   priceSelection: string;
   materialSelection: string;
   sizeSelection: string;
+  artType: string;
 };
 
 export type DropdownMenuOptionType = {
