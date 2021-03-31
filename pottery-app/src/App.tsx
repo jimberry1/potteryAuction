@@ -8,6 +8,7 @@ import Navbar from './UI/navbar';
 import AccountPage from './routes/accountPage';
 import TestPage from './routes/testPage';
 import ResultsPage from './routes/resultsPage';
+import Footer from './components/tailwindComponents/footer';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" component={LandingPage} />
         </Switch>
       </div>
+      <Footer />
     </div>
   );
 }
