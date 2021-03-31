@@ -17,6 +17,9 @@ const TestPage: React.FunctionComponent<TestPageProps> = () => {
       photosURL: ['https://source.unsplash.com/random'],
       views: 0,
       size: 'M',
+      charityName: 'British Heart Foundation',
+      charityDescription: 'This charity means a lot to me',
+      charityURL: 'https://www.bhf.org.uk/',
     };
     addArtworkToArtworkDatabaseTable(dummyArtwork)
       .catch((err) => console.log(err))

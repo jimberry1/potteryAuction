@@ -27,6 +27,9 @@ const ArtPage: React.SFC<ArtPageProps> = () => {
     photosURL: [],
     views: 0,
     size: '',
+    charityName: '',
+    charityDescription: '',
+    charityURL: '',
   });
 
   useEffect(() => {
