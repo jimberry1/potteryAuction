@@ -18,6 +18,9 @@ export type artworkType = {
   views: number;
   photosURL: string[];
   size: string;
+  charityName: string;
+  charityDescription: string;
+  charityURL: string;
 };
 
 export type auctionType = {
