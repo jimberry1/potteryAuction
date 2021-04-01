@@ -21,6 +21,7 @@ export type artworkType = {
   charityName: string;
   charityDescription: string;
   charityURL: string;
+  sold: boolean;
 };
 
 export type auctionType = {
@@ -34,11 +35,12 @@ export type auctionType = {
   sold: boolean;
 };
 
-export type aristType = {
+export type artistType = {
   firstName: string;
   surname: string;
   userId: string;
   profileDescription: string;
+  photoURL: string;
 };
 
 // Reducer state profiles
