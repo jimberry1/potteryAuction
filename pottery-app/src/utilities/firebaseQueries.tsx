@@ -1,6 +1,7 @@
 import db from '../firebase';
-import { artworkType, searchStateType } from '../types';
+import { artistType, artworkType, searchStateType } from '../types';
 import {
+  ARTIST_TABLE,
   ARTWORK_TABLE,
   FIREBASE_GENERAL_INFO_TABLE,
 } from './firebaseQueryConfig';
@@ -26,6 +27,14 @@ export const addViewToArtworkWhenLoaded = (artworkId: string) => {
     .doc(artworkId)
     .update({ views: Firebase.firestore.FieldValue.increment(1) })
     .catch((err) => console.log(err));
+};
+
+export const addArtistToFirebase = async (artist: artistType) => {
+  return await db.collection(ARTIST_TABLE).add(artist);
+};
+
+export const fetchArtistByArtistId = async (artistId: string) => {
+  return await db.collection(ARTIST_TABLE).doc(artistId).get();
 };
 
 export const createCustomArtQuery = async (searchFilters: searchStateType) => {
