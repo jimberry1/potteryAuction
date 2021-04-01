@@ -49,6 +49,8 @@ test('renders learn react link', () => {
  *
  * Get set up with firebase storage to store images of pots
  *
+ * Add sign up / sign in component to allow users to create an account
+ *
  *
  *
  *
