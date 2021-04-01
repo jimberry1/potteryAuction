@@ -9,12 +9,15 @@ import {
   DESCRIPTION,
 } from '../../configuration/staticVariableNames/artPageTabAndFieldNames';
 import PointyArrowWithText from '../pointArrowWithText';
+import BlueBanner from '../../UI/alerts/blueBanner';
 export interface ArtWithSectionsAndPriceProps {
   artwork: artworkType;
+  artistClicked: (artistId: string) => void;
 }
 
 export interface ArtComponentSubSection {
   artwork: artworkType;
+  clicked?: any;
 }
 
 type category = {
@@ -38,6 +41,7 @@ const subComponentVairants = {
 
 const ArtWithSectionsAndPrice: React.FunctionComponent<ArtWithSectionsAndPriceProps> = ({
   artwork,
+  artistClicked,
 }) => {
   const categories: category[] = [
     { id: '98234894389j', label: 'Description' },
@@ -47,6 +51,9 @@ const ArtWithSectionsAndPrice: React.FunctionComponent<ArtWithSectionsAndPricePr
   const [selectedCategory, setSelectedCategory] = useState('Description');
   return (
     <section className="text-gray-600 body-font overflow-hidden">
+      {artwork.sold && (
+        <BlueBanner messageText="This item has already been sold" />
+      )}
       <div className="container px-5 py-2 md:py-24 mx-auto">
         <motion.div
           className="lg:w-4/5 mx-auto flex flex-wrap"
@@ -81,7 +88,14 @@ const ArtWithSectionsAndPrice: React.FunctionComponent<ArtWithSectionsAndPricePr
                 <DescriptionSubSection artwork={artwork} key="234892jwdjw209" />
               )}
               {selectedCategory === ARTIST && (
-                <ArtistSubSection artwork={artwork} key="234892jwdj2242w209" />
+                <ArtistSubSection
+                  artwork={artwork}
+                  key="234892jwdj2242w209"
+                  clicked={() => {
+                    console.log('Handler invoked with id ' + artwork.artistUid);
+                    artistClicked(artwork.artistUid);
+                  }}
+                />
               )}
               {selectedCategory === CHARITY && (
                 <CharitySubSection
@@ -119,7 +133,7 @@ const ArtWithSectionsAndPrice: React.FunctionComponent<ArtWithSectionsAndPricePr
 
 export default ArtWithSectionsAndPrice;
 
-const DescriptionSubSection: React.FunctionComponent<ArtWithSectionsAndPriceProps> = ({
+const DescriptionSubSection: React.FunctionComponent<ArtComponentSubSection> = ({
   artwork,
 }) => {
   return (
@@ -147,7 +161,7 @@ const DescriptionSubSection: React.FunctionComponent<ArtWithSectionsAndPriceProp
   );
 };
 
-const CharitySubSection: React.FunctionComponent<ArtWithSectionsAndPriceProps> = ({
+const CharitySubSection: React.FunctionComponent<ArtComponentSubSection> = ({
   artwork,
 }) => {
   return (
@@ -167,8 +181,9 @@ const CharitySubSection: React.FunctionComponent<ArtWithSectionsAndPriceProps> =
   );
 };
 
-const ArtistSubSection: React.FunctionComponent<ArtWithSectionsAndPriceProps> = ({
+const ArtistSubSection: React.FunctionComponent<ArtComponentSubSection> = ({
   artwork,
+  clicked,
 }) => {
   return (
     <motion.div
@@ -184,7 +199,7 @@ const ArtistSubSection: React.FunctionComponent<ArtWithSectionsAndPriceProps> = 
       <p className="leading-relaxed mb-4">
         This is the section where information about the artist will be displayed
       </p>
-      <PointyArrowWithText text="See more" clicked={() => {}} />
+      <PointyArrowWithText text="See more" clicked={clicked} />
     </motion.div>
   );
 };
