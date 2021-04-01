@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import './tailwind.output.css';
 import userReducer from './store/reducers/user';
+import adminReducer from './store/reducers/admin';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
@@ -15,7 +16,7 @@ const rootReducer = combineReducers({
   // auth: authReducer,
   user: userReducer,
   search: searchReducer,
-  // admin: adminReducer,
+  admin: adminReducer,
   // Add other reducers here if and when they are needed
 });
 

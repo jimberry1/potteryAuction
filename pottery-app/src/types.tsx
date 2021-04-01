@@ -63,6 +63,15 @@ export type DropDownMenuType = {
   dispatchUpdateFunction: (newFilterValue: string) => void;
   getDesiredStateFromSearchSelector: (searchState: searchStateType) => string;
 };
+
+export type ModalInformationType = {
+  title?: string;
+  body?: string;
+  actionButtonDescription?: string;
+};
+
+// Reducer action types
+// export type
 /**
  * Types
  *
