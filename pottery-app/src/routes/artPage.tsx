@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router';
+import { useLocation, useHistory } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import {
   addViewToArtworkWhenLoaded,
@@ -9,11 +9,13 @@ import ArtComponent from '../components/tailwindComponents/artComponent';
 import ArtContentWithArtist from '../components/tailwindComponents/artContentWithArtist';
 import ArtContentWithPrice from '../components/tailwindComponents/artContentWithPrice';
 import ArtWithSectionsAndPrice from '../components/tailwindComponents/artWithSectionsAndPrice';
+import { redirectToArtistPage } from '../utilities/redirectFunctions';
 
 export interface ArtPageProps {}
 
 const ArtPage: React.SFC<ArtPageProps> = () => {
   const location = useLocation();
+  const history = useHistory();
   const [artworkId, setArtworkId] = useState('');
   const [loading, setLoading] = useState(true);
   const [artwork, setArtwork] = useState({
@@ -30,6 +32,7 @@ const ArtPage: React.SFC<ArtPageProps> = () => {
     charityName: '',
     charityDescription: '',
     charityURL: '',
+    sold: false,
   });
 
   useEffect(() => {
@@ -61,13 +64,22 @@ const ArtPage: React.SFC<ArtPageProps> = () => {
     }
   }, [artworkId, artwork]);
 
+  const artistClickedHandlerInvoked = (artistId: string) => {
+    history.push(redirectToArtistPage(artistId));
+  };
+
   return (
     <div>
       <PageLoaderHoc loading={loading}>
         {/* <ArtComponent artwork={artwork} /> */}
         {/* <ArtContentWithArtist artwork={artwork} /> */}
         {/* <ArtContentWithPrice artwork={artwork} /> */}
-        <ArtWithSectionsAndPrice artwork={artwork} />
+        <ArtWithSectionsAndPrice
+          artwork={artwork}
+          artistClicked={(artistId: string) =>
+            artistClickedHandlerInvoked(artistId)
+          }
+        />
       </PageLoaderHoc>
     </div>
   );
