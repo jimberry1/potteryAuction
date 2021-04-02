@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
+import ArtResultsSet from '../components/artResultsSet';
+import TestTailwindProfile from '../components/tailwindComponents/testTailwindProfile';
 import TestArtistDisplay from '../components/testArtistDisplay';
-import { fetchArtistByArtistId } from '../utilities/firebaseQueries';
+import { ArtContainer } from '../styles/genericStyles';
+import { ArtistProfileArtworkStatistics } from '../types';
+import {
+  fetchArtForArtistIdWithLimit,
+  fetchArtistByArtistId,
+} from '../utilities/firebaseQueries';
+import { generateArtistStatsFromArtworkArray } from '../utilities/utilityFunctions';
 
 export interface ArtistContainerProps {
   artistId: string;
@@ -15,8 +23,10 @@ const ArtistContainer: React.SFC<ArtistContainerProps> = ({ artistId }) => {
       userId: '',
       profileDescription: '',
       photoURL: '',
+      location: '',
     },
   });
+  const [artistArtwork, setArtistArtwork]: any = useState([]);
 
   useEffect(() => {
     if (artistId) {
@@ -27,9 +37,35 @@ const ArtistContainer: React.SFC<ArtistContainerProps> = ({ artistId }) => {
       });
     }
   }, [artistId]);
+
+  useEffect(() => {
+    if (artistId) {
+      fetchArtForArtistIdWithLimit(artistId, 10).then(
+        (artworkQuerySnapshot) => {
+          setArtistArtwork(
+            artworkQuerySnapshot.docs.map((artwork) => ({
+              id: artwork.id,
+              data: artwork.data(),
+            }))
+          );
+        }
+      );
+    }
+  }, [artistId]);
   return (
     <div>
-      {artist.data.firstName && <TestArtistDisplay artist={artist.data} />}
+      {artist.data.firstName && (
+        <TestTailwindProfile
+          artist={artist.data}
+          artworkStats={generateArtistStatsFromArtworkArray(artistArtwork)}
+        />
+      )}
+      {artistArtwork[0] && (
+        <ArtResultsSet
+          artworks={artistArtwork}
+          title="Artwork by this artist"
+        />
+      )}
     </div>
   );
 };
