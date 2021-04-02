@@ -92,7 +92,6 @@ const ArtWithSectionsAndPrice: React.FunctionComponent<ArtWithSectionsAndPricePr
                   artwork={artwork}
                   key="234892jwdj2242w209"
                   clicked={() => {
-                    console.log('Handler invoked with id ' + artwork.artistUid);
                     artistClicked(artwork.artistUid);
                   }}
                 />
@@ -199,7 +198,7 @@ const ArtistSubSection: React.FunctionComponent<ArtComponentSubSection> = ({
       <p className="leading-relaxed mb-4">
         This is the section where information about the artist will be displayed
       </p>
-      <PointyArrowWithText text="See more" clicked={clicked} />
+      <PointyArrowWithText text="See artist" clicked={clicked} />
     </motion.div>
   );
 };

@@ -2,20 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ArtCard from '../components/tailwindComponents/artCard';
 import db from '../firebase';
 import { artworkType } from '../types';
-import styled from 'styled-components';
 import { createCustomArtQuery } from '../utilities/firebaseQueries';
 import { RootStateOrAny, useSelector } from 'react-redux';
+import { ArtContainer } from '../styles/genericStyles';
 export interface TestGenericArtContainerProps {
   artQuery?: any;
 }
-
-const ArtContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  //   margin: 120px;
-  margin-top: 15px;
-`;
 
 const TestGenericArtContainer: React.SFC<TestGenericArtContainerProps> = ({
   artQuery,
@@ -23,16 +15,10 @@ const TestGenericArtContainer: React.SFC<TestGenericArtContainerProps> = ({
   const artSearchFilters = useSelector((state: RootStateOrAny) => state.search);
   const [artResults, setArtResults]: any = useState([]);
 
-  // I need to write a query that takes the filters from the filter reducer and constructs a custom query
-  // Solution 1 would be write a query for every combination of search filter and then call that - but this has lots of manual work and isn't scalable
-
   useEffect(() => {
-    // db.collection('artwork')
-    //   .limit(3)
-    //   .get()
-    createCustomArtQuery(artSearchFilters).then((artQuery) => {
+    createCustomArtQuery(artSearchFilters).then((artQueryResults) => {
       setArtResults(
-        artQuery.docs.map((artworkDoc) => ({
+        artQueryResults.docs.map((artworkDoc) => ({
           id: artworkDoc.id,
           data: artworkDoc.data(),
         }))

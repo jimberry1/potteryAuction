@@ -51,7 +51,6 @@ const ArtPage: React.SFC<ArtPageProps> = () => {
           console.log('artwork fetched successfully');
           if (artworkSnapshot.exists) {
             setArtwork(artworkSnapshot.data());
-            console.log(artworkSnapshot.data());
           }
         });
     }
