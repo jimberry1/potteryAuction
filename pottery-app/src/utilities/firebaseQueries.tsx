@@ -37,6 +37,10 @@ export const fetchArtistByArtistId = async (artistId: string) => {
   return await db.collection(ARTIST_TABLE).doc(artistId).get();
 };
 
+export const fetchArtistsWithLimit = async (limit: number) => {
+  return await db.collection(ARTIST_TABLE).limit(limit).get();
+};
+
 export const fetchArtForArtistIdWithLimit = async (
   artistId: string,
   limit: number
