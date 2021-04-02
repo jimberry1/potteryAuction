@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { createCustomArtQuery } from '../../utilities/firebaseQueries';
+import {
+  createCustomArtQuery,
+  fetchArtistsWithLimit,
+} from '../../utilities/firebaseQueries';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import ArtResultsSet from '../../components/artResultsSet';
+import ArtistResultsSet from '../../components/artistResultsSet';
 
 export interface ArtistSearchResultsDisplayProps {}
 
@@ -10,7 +14,7 @@ const ArtistSearchResultsDisplay: React.SFC<ArtistSearchResultsDisplayProps> = (
   const [artistResults, setArtistResults]: any = useState([]);
 
   useEffect(() => {
-    createCustomArtQuery(artSearchFilters).then((artQueryResults) => {
+    fetchArtistsWithLimit(10).then((artQueryResults) => {
       setArtistResults(
         artQueryResults.docs.map((artworkDoc) => ({
           id: artworkDoc.id,
@@ -20,7 +24,7 @@ const ArtistSearchResultsDisplay: React.SFC<ArtistSearchResultsDisplayProps> = (
     });
   }, [artSearchFilters]);
 
-  return <>{artistResults && <ArtResultsSet artworks={artistResults} />}</>;
+  return <>{artistResults && <ArtistResultsSet artists={artistResults} />}</>;
 };
 
 export default ArtistSearchResultsDisplay;

@@ -1,4 +1,5 @@
 import SearchFilterBar from '../../components/searchFilterBar';
+import { artSearchFilterFields } from '../../configuration/potFilterFields';
 import TestGenericArtContainer from './testGenericArtContainer';
 
 export interface ArtSearchResultContainerProps {}
@@ -6,7 +7,7 @@ export interface ArtSearchResultContainerProps {}
 const ArtSearchResultContainer: React.SFC<ArtSearchResultContainerProps> = () => {
   return (
     <>
-      <SearchFilterBar />
+      <SearchFilterBar searchFilterFields={artSearchFilterFields} />
       <TestGenericArtContainer />
     </>
   );
