@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ArtCard from '../components/tailwindComponents/artCard';
-import db from '../firebase';
-import { artworkType } from '../types';
-import { createCustomArtQuery } from '../utilities/firebaseQueries';
+import { createCustomArtQuery } from '../../utilities/firebaseQueries';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import { ArtContainer } from '../styles/genericStyles';
+import ArtResultsSet from '../../components/artResultsSet';
 export interface TestGenericArtContainerProps {
   artQuery?: any;
 }
@@ -26,20 +23,7 @@ const TestGenericArtContainer: React.SFC<TestGenericArtContainerProps> = ({
     });
   }, [artSearchFilters]);
 
-  return (
-    <ArtContainer>
-      {artResults &&
-        artResults.map((artwork: { id: string; data: artworkType }) => {
-          return (
-            <ArtCard
-              artworkId={artwork.id}
-              artwork={artwork.data}
-              key={artwork.id}
-            />
-          );
-        })}
-    </ArtContainer>
-  );
+  return <>{artResults && <ArtResultsSet artworks={artResults} />}</>;
 };
 
 export default TestGenericArtContainer;
