@@ -37,6 +37,17 @@ export const fetchArtistByArtistId = async (artistId: string) => {
   return await db.collection(ARTIST_TABLE).doc(artistId).get();
 };
 
+export const fetchArtForArtistIdWithLimit = async (
+  artistId: string,
+  limit: number
+) => {
+  return await db
+    .collection(ARTWORK_TABLE)
+    .where('artistUid', '==', artistId)
+    .limit(limit)
+    .get();
+};
+
 export const createCustomArtQuery = async (searchFilters: searchStateType) => {
   let dbQuery = db.collection(ARTWORK_TABLE);
   if (searchFilters.materialSelection) {
