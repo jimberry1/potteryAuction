@@ -24,7 +24,13 @@ const ArtistSearchResultsDisplay: React.SFC<ArtistSearchResultsDisplayProps> = (
     });
   }, [artSearchFilters]);
 
-  return <>{artistResults && <ArtistResultsSet artists={artistResults} />}</>;
+  return (
+    <>
+      {artistResults && (
+        <ArtistResultsSet artists={artistResults} title="Meet our artists" />
+      )}
+    </>
+  );
 };
 
 export default ArtistSearchResultsDisplay;

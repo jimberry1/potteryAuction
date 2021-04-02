@@ -8,9 +8,9 @@ const TwoWindowPicture: React.SFC<TwoWindowPictureProps> = ({
   buttonClickedHandler,
 }) => {
   return (
-    <section className="text-gray-600 body-font">
+    <section className="text-gray-600 body-font overflow-y-hidden">
       <div className="container px-5 py-5 mx-auto">
-        <div className="flex flex-wrap -mx-4 -mb-10 text-center">
+        <div className="flex flex-wrap -mx-4 -mb-10 text-center h-full overflow-y-hidden">
           <div className="sm:w-1/2 mb-10 px-4">
             <div className="rounded-lg h-64 overflow-hidden transition duration-500 ease-in-out bg-blue-600 transform hover:-translate-y-1">
               <img
