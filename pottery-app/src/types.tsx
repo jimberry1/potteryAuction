@@ -41,6 +41,7 @@ export type artistType = {
   userId: string;
   profileDescription: string;
   photoURL: string;
+  location: string;
 };
 
 // Reducer state profiles
@@ -70,6 +71,13 @@ export type ModalInformationType = {
   title?: string;
   body?: string;
   actionButtonDescription?: string;
+};
+
+export type ArtistProfileArtworkStatistics = {
+  totalViews: number;
+  artworkCount: number;
+  totalSales: number;
+  totalEarnedFromSales: number;
 };
 
 // Reducer action types
