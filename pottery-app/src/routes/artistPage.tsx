@@ -1,8 +1,6 @@
 import { useLocation } from 'react-router';
 import React, { useState, useEffect } from 'react';
-import TestArtistDisplay from '../components/testArtistDisplay';
 import ArtistContainer from '../containers/artistContainer';
-import TestTailwindProfile from '../components/tailwindComponents/testTailwindProfile';
 
 export interface ArtistPageProps {}
 
