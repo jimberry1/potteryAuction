@@ -3,7 +3,9 @@ import { DropDownMenuType } from '../types';
 import { useSelector, useDispatch, RootStateOrAny } from 'react-redux';
 import { artSearchFilterFields } from '../configuration/potFilterFields';
 import styled from 'styled-components';
-export interface SearchFilterBarProps {}
+export interface SearchFilterBarProps {
+  searchFilterFields: DropDownMenuType[];
+}
 
 const StyledDropdownContainer = styled.div`
   display: flex;
@@ -17,13 +19,15 @@ const StyledDropdownContainer = styled.div`
   border-bottom: 10px solid black;
 `;
 
-const SearchFilterBar: React.SFC<SearchFilterBarProps> = () => {
+const SearchFilterBar: React.SFC<SearchFilterBarProps> = ({
+  searchFilterFields,
+}) => {
   const dispatch = useDispatch();
   const priceFilter = useSelector((state: RootStateOrAny) => state.search);
 
   return (
     <StyledDropdownContainer>
-      {artSearchFilterFields.map((dropDownMenu: DropDownMenuType) => {
+      {searchFilterFields.map((dropDownMenu: DropDownMenuType) => {
         return (
           <DropDown
             key={dropDownMenu.id}
