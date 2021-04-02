@@ -14,7 +14,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <div className="bg-gray-200 flex justify-center h-full min-h-screen overflow-x-hidden pt-20">
+      <div className="bg-gray-200 flex justify-center min-h-screen overflow-x-hidden pt-20">
         <Switch>
           <Route path="/explore" component={ExplorePage} />
           <Route path="/artwork" component={ArtPage} />

@@ -18,7 +18,7 @@ const ResultsPage: React.SFC<ResultsPageProps> = () => {
     }
   }, [location]);
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '100vw', minHeight: '100vh' }}>
       {category === 'artwork' && <ArtSearchResultContainer />}
       {category === 'artist' && <ArtistSearchResultContainer />}
       {!category && 'Pick something to search for'}
