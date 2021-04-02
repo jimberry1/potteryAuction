@@ -29,7 +29,7 @@ const Navbar = () => {
             <div
               className="block px-0 py-3 border-b-2 border-transparent lg:p-4 hover:border-indigo-400"
               //   href="/explore"
-              onClick={() => history.push('/explore')}
+              onClick={() => history.push('/results')}
             >
               Explore
             </div>
