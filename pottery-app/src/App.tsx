@@ -1,4 +1,5 @@
 import './App.css';
+import { useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router';
 import LandingPage from './routes/landingPage';
 import ExplorePage from './routes/explorePage';
@@ -9,11 +10,15 @@ import AccountPage from './routes/accountPage';
 import TestPage from './routes/testPage';
 import ResultsPage from './routes/resultsPage';
 import Footer from './components/tailwindComponents/footer';
+import AuthenticationContainer from './containers/authenticationContainer';
+import { userIdStateSelector } from './store/storeUtilities';
 
 function App() {
+  const userId = useSelector(userIdStateSelector);
   return (
     <div>
       <Navbar />
+      {/* {!userId && <AuthenticationContainer />} */}
       <div className="bg-gray-200 flex justify-center min-h-screen overflow-x-hidden pt-20">
         <Switch>
           <Route path="/explore" component={ExplorePage} />
