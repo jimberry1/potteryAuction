@@ -1,10 +1,19 @@
 import Firebase from 'firebase';
 export type userType = {
-  firstName: string;
+  forename: string;
   surname: string;
   emailAddress: string;
   artistUid: string;
   isAdmin: boolean;
+  timestamp: Firebase.firestore.Timestamp | null;
+  photoURL?: string;
+};
+
+export type userTypeForUpdating = {
+  forename?: string;
+  surname?: string;
+  emailAddress?: string;
+  isAdmin?: boolean;
 };
 
 export type artworkType = {
@@ -22,6 +31,7 @@ export type artworkType = {
   charityDescription: string;
   charityURL: string;
   sold: boolean;
+  timestamp?: Firebase.firestore.Timestamp;
 };
 
 export type auctionType = {
@@ -42,6 +52,7 @@ export type artistType = {
   profileDescription: string;
   photoURL: string;
   location: string;
+  timestamp?: Firebase.firestore.Timestamp;
 };
 
 // Reducer state profiles
