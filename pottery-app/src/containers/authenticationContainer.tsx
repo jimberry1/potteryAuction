@@ -24,7 +24,7 @@ export interface AuthenticationContainerProps {}
  */
 const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
   const localStorageUid: string | null = localStorage.getItem('caf_uid');
-  const [createAnAccount, setCreateAnAccount] = useState(true);
+  const [createAnAccount, setCreateAnAccount] = useState(false);
   const [email, setEmail] = useState('');
   const [forename, setForename] = useState('');
   const [surname, setSurname] = useState('');
@@ -35,14 +35,6 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
   const submitFormHandler = (e: any) => {
     e.preventDefault();
     signIn(e);
-  };
-
-  const formSubmittedSuccessfullyHandler = () => {
-    setEmail('');
-    setForename('');
-    setSurname('');
-    setPassword('');
-    setConfirmPassword('');
   };
 
   const signIn = (e: any) => {
@@ -68,7 +60,6 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
             updateUserInformationForUserId(result.user.uid, userInformation);
             dispatch(setUser(result.user.uid, userInformation));
             localStorage.setItem('caf_uid', result.user.uid);
-            formSubmittedSuccessfullyHandler();
           }
         })
         .catch((err) => {
@@ -87,7 +78,6 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
             if (docSnapshot.exists) {
               dispatch(setUserFromFirebaseUserSnapshot(docSnapshot));
               localStorage.setItem('caf_uid', result.user.uid);
-              formSubmittedSuccessfullyHandler();
             } else {
               console.log(
                 "This is the weird case where the user is signing in but actually they don't exist in the user database table"
@@ -105,7 +95,7 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
               updateUserInformationForUserId(result.user.uid, userInformation);
               localStorage.setItem('caf_uid', result.user.uid);
               dispatch(setUser(result.user.uid, userInformation));
-              formSubmittedSuccessfullyHandler();
+              //   formSubmittedSuccessfullyHandler();
             }
           });
         })
@@ -124,7 +114,6 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
             if (docSnapshot.exists) {
               console.log('This user already exists');
               dispatch(setUserFromFirebaseUserSnapshot(docSnapshot));
-              formSubmittedSuccessfullyHandler();
             } else {
               updateUserInformationForUserId(result.user.uid, {
                 forename: result.additionalUserInfo.profile.given_name,
@@ -147,8 +136,6 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
                   photoURL: result.user.photoURL,
                 })
               );
-
-              formSubmittedSuccessfullyHandler();
             }
           }
         );
