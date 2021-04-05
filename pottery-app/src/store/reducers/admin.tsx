@@ -1,10 +1,11 @@
-import { ModalInformationType } from '../../types';
+import { adminStateType, ModalInformationType } from '../../types';
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../storeUtilities';
 
-const initialState: any = {
+const initialState: adminStateType = {
   showModal: false,
   modalInformation: { title: '', body: '', actionButtonDescription: '' },
+  redirectLink: '',
 };
 
 const toggleModal = (state: any, action: any) => {
@@ -17,8 +18,6 @@ const updateModalInformation = (
   state: any,
   action: { type: string; modalInformation: ModalInformationType }
 ) => {
-  console.log('here');
-  console.log(action);
   return updateObject(state, {
     modalInformation: {
       title: action.modalInformation.title,

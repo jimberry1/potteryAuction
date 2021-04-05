@@ -53,6 +53,17 @@ export type searchStateType = {
   artType: string;
 };
 
+export type userStateType = {
+  userId: string;
+  user: userType;
+};
+
+export type adminStateType = {
+  showModal: boolean;
+  modalInformation: ModalInformationType;
+  redirectLink: '';
+};
+
 export type DropdownMenuOptionType = {
   id: string;
   label: string;
@@ -68,9 +79,9 @@ export type DropDownMenuType = {
 };
 
 export type ModalInformationType = {
-  title?: string;
-  body?: string;
-  actionButtonDescription?: string;
+  title: string;
+  body: string;
+  actionButtonDescription: string;
 };
 
 export type ArtistProfileArtworkStatistics = {
