@@ -1,23 +1,22 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../storeUtilities';
-import { userType } from '../../types';
+import { userStateType } from '../../types';
 
-const initialState: userType = {
-  firstName: '',
-  surname: '',
-  emailAddress: '',
-  artistUid: '',
-  isAdmin: false,
+const initialState: userStateType = {
+  userId: '',
+  user: {
+    firstName: '',
+    surname: '',
+    emailAddress: '',
+    artistUid: '',
+    isAdmin: false,
+  },
 };
 
-const setUser = (state: userType, action: any) => {
+const setUser = (state: userStateType, action: any) => {
   return updateObject(state, {
-    uid: action.uid,
-    forename: action.forename,
-    personalInfo: action.personalInfo,
-    workoutProgrammeId: action.workoutProgrammeId,
-    email: action.email,
-    isPT: action.isPT,
+    userId: action.userId,
+    user: action.user,
   });
 };
 
