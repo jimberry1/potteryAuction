@@ -12,3 +12,4 @@ export const searchStateSelector = (state: RootStateOrAny) => state.search;
 export const adminStateSelector = (state: RootStateOrAny) => state.admin;
 
 export const userStateSelector = (state: RootStateOrAny) => state.user;
+export const userIdStateSelector = (state: RootStateOrAny) => state.user.userId;
