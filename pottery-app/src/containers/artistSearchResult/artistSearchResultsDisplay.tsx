@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import {
-  createCustomArtQuery,
-  fetchArtistsWithLimit,
-} from '../../utilities/firebaseQueries';
+import { fetchArtistsWithLimit } from '../../utilities/firebaseQueries';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import ArtResultsSet from '../../components/artResultsSet';
 import ArtistResultsSet from '../../components/artistResultsSet';
+import { searchStateSelector } from '../../store/storeUtilities';
 
 export interface ArtistSearchResultsDisplayProps {}
 
-const ArtistSearchResultsDisplay: React.SFC<ArtistSearchResultsDisplayProps> = () => {
-  const artSearchFilters = useSelector((state: RootStateOrAny) => state.search);
+const ArtistSearchResultsDisplay: React.FunctionComponent<ArtistSearchResultsDisplayProps> = () => {
+  const artSearchFilters = useSelector(searchStateSelector);
   const [artistResults, setArtistResults]: any = useState([]);
 
   useEffect(() => {

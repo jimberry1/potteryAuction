@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createCustomArtQuery } from '../../utilities/firebaseQueries';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import ArtResultsSet from '../../components/artResultsSet';
+import { searchStateSelector } from '../../store/storeUtilities';
 export interface TestGenericArtContainerProps {
   artQuery?: any;
 }
@@ -9,7 +10,7 @@ export interface TestGenericArtContainerProps {
 const TestGenericArtContainer: React.SFC<TestGenericArtContainerProps> = ({
   artQuery,
 }) => {
-  const artSearchFilters = useSelector((state: RootStateOrAny) => state.search);
+  const artSearchFilters = useSelector(searchStateSelector);
   const [artResults, setArtResults]: any = useState([]);
 
   useEffect(() => {
