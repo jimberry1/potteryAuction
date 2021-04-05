@@ -45,6 +45,13 @@ test('renders learn react link', () => {
  * Payment can be completed over the site or via other payment systems
  *
  *
+ * Add in follow records for artists which allows a user to follow an artist. Control this in a follower db table
+ *
+ * Add in an administration page for approving and removing new artists
+ *
+ *
+ *
+ *
  * Other things to do
  *
  * Get set up with firebase storage to store images of pots
