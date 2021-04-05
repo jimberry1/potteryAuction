@@ -5,18 +5,20 @@ import { userStateType } from '../../types';
 const initialState: userStateType = {
   userId: '',
   user: {
-    firstName: '',
+    forename: '',
     surname: '',
     emailAddress: '',
     artistUid: '',
     isAdmin: false,
+    timestamp: null,
+    photoURL: '',
   },
 };
 
 const setUser = (state: userStateType, action: any) => {
   return updateObject(state, {
     userId: action.userId,
-    user: action.user,
+    user: { ...action.user },
   });
 };
 
