@@ -1,9 +1,16 @@
 import db from '../firebase';
-import { artistType, artworkType, searchStateType } from '../types';
+import {
+  artistType,
+  artworkType,
+  searchStateType,
+  userType,
+  userTypeForUpdating,
+} from '../types';
 import {
   ARTIST_TABLE,
   ARTWORK_TABLE,
   FIREBASE_GENERAL_INFO_TABLE,
+  USER_TABLE,
 } from './firebaseQueryConfig';
 import Firebase from 'firebase';
 import { ART_MATERIALS } from '../configuration/staticVariableNames/databaseTableAndFieldNames';
@@ -39,6 +46,33 @@ export const fetchArtistByArtistId = async (artistId: string) => {
 
 export const fetchArtistsWithLimit = async (limit: number) => {
   return await db.collection(ARTIST_TABLE).limit(limit).get();
+};
+
+export const fetchUserByUserId = async (userId: string) => {
+  return await db.collection(USER_TABLE).doc(userId).get();
+};
+
+export const addUserToUsers = async (user: userType) => {
+  return db.collection(USER_TABLE).add({
+    ...user,
+    timestamp: Firebase.firestore.FieldValue.serverTimestamp(),
+  });
+};
+
+export const updateUserInformationForUserId = async (
+  userId: string,
+  user: userTypeForUpdating | userType
+) => {
+  return await db
+    .collection(USER_TABLE)
+    .doc(userId)
+    .set(
+      {
+        ...user,
+        timestamp: Firebase.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
 };
 
 export const fetchArtForArtistIdWithLimit = async (
