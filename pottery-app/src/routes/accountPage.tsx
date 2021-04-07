@@ -1,13 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import BoldPageTitle from '../components/boldPageTitle';
-import ArtistContainer from '../containers/artistContainer';
+import AccountPageArtistContainer from '../containers/accountContainers/accountPageArtistContainer';
 import { toggleAuthenticationContainer } from '../store/actions/adminActions';
 import {
   userArtistIdStateSelector,
   userIdStateSelector,
 } from '../store/storeUtilities';
 import PurpleButton from '../UI/buttons/purpleButton';
-
 export interface AccountPageProps {}
 
 const AccountPage: React.SFC<AccountPageProps> = () => {
@@ -33,7 +32,7 @@ const AccountPage: React.SFC<AccountPageProps> = () => {
     return (
       <div>
         {artistId ? (
-          <ArtistContainer artistId={artistId} />
+          <AccountPageArtistContainer artistId={artistId} />
         ) : (
           <div>
             <BoldPageTitle
