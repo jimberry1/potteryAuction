@@ -36,13 +36,15 @@ export type artworkType = {
 
 export type auctionType = {
   artworkId: string;
+  artistId: string;
   minimumPrice: number;
   currentBid: number;
   standardPrice: number;
   auctionType: string;
+  sold: boolean;
   startTimestamp: Firebase.firestore.Timestamp;
   endTimestamp: Firebase.firestore.Timestamp;
-  sold: boolean;
+  timestamp: Firebase.firestore.Timestamp;
 };
 
 export type artistType = {
@@ -72,7 +74,8 @@ export type userStateType = {
 export type adminStateType = {
   showModal: boolean;
   modalInformation: ModalInformationType;
-  redirectLink: '';
+  redirectLink: string;
+  showAuth: boolean;
 };
 
 export type DropdownMenuOptionType = {
