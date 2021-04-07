@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import SignInCard from '../components/tailwindComponents/SignInCard';
-import db, { auth, provider } from '../firebase';
+import { auth, provider } from '../firebase';
 import firebase from 'firebase';
 import {
   fetchUserByUserId,
@@ -13,17 +13,17 @@ import {
   setUserFromFirebaseUserSnapshot,
 } from '../store/actions/userActions';
 import { userType } from '../types';
+import { LOCAL_STORAGE_ID_KEY } from '../configuration/staticVariableNames/databaseTableAndFieldNames';
+import { AnimatePresence, motion } from 'framer-motion';
+import { authenticationCardDropInVariants } from '../styles/animations';
+import { toggleAuthenticationContainer } from '../store/actions/adminActions';
 
 export interface AuthenticationContainerProps {}
 
-/**
- * This container will be used to log the user into firebase
- *
- * Needs to be able to create an account, sign in with firebase or use google
- * @returns
- */
 const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
-  const localStorageUid: string | null = localStorage.getItem('caf_uid');
+  const localStorageUid: string | null = localStorage.getItem(
+    LOCAL_STORAGE_ID_KEY
+  );
   const [createAnAccount, setCreateAnAccount] = useState(false);
   const [email, setEmail] = useState('');
   const [forename, setForename] = useState('');
@@ -36,6 +36,21 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
     e.preventDefault();
     signIn(e);
   };
+
+  if (localStorageUid !== null) {
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        fetchUserByUserId(localStorageUid).then((docSnapshot) => {
+          dispatch(setUserFromFirebaseUserSnapshot(docSnapshot));
+        });
+      } else {
+        console.log(
+          'Attempted to log in using local storage id key that was not valid'
+        );
+        localStorage.removeItem(LOCAL_STORAGE_ID_KEY);
+      }
+    });
+  }
 
   const signIn = (e: any) => {
     e.preventDefault();
@@ -59,7 +74,7 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
             };
             updateUserInformationForUserId(result.user.uid, userInformation);
             dispatch(setUser(result.user.uid, userInformation));
-            localStorage.setItem('caf_uid', result.user.uid);
+            localStorage.setItem(LOCAL_STORAGE_ID_KEY, result.user.uid);
           }
         })
         .catch((err) => {
@@ -77,7 +92,8 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
           fetchUserByUserId(result.user.uid).then((docSnapshot: any) => {
             if (docSnapshot.exists) {
               dispatch(setUserFromFirebaseUserSnapshot(docSnapshot));
-              localStorage.setItem('caf_uid', result.user.uid);
+              dispatch(toggleAuthenticationContainer(false));
+              localStorage.setItem(LOCAL_STORAGE_ID_KEY, result.user.uid);
             } else {
               console.log(
                 "This is the weird case where the user is signing in but actually they don't exist in the user database table"
@@ -93,8 +109,9 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
               };
 
               updateUserInformationForUserId(result.user.uid, userInformation);
-              localStorage.setItem('caf_uid', result.user.uid);
+              localStorage.setItem(LOCAL_STORAGE_ID_KEY, result.user.uid);
               dispatch(setUser(result.user.uid, userInformation));
+              dispatch(toggleAuthenticationContainer(false));
               //   formSubmittedSuccessfullyHandler();
             }
           });
@@ -113,7 +130,9 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
           (docSnapshot: firebase.firestore.DocumentSnapshot) => {
             if (docSnapshot.exists) {
               console.log('This user already exists');
+              localStorage.setItem(LOCAL_STORAGE_ID_KEY, result.user.uid);
               dispatch(setUserFromFirebaseUserSnapshot(docSnapshot));
+              dispatch(toggleAuthenticationContainer(false));
             } else {
               updateUserInformationForUserId(result.user.uid, {
                 forename: result.additionalUserInfo.profile.given_name,
@@ -124,6 +143,8 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
                 timestamp: null,
                 photoURL: result.user.photoURL,
               });
+
+              localStorage.setItem(LOCAL_STORAGE_ID_KEY, result.user.uid);
 
               dispatch(
                 setUser(result.user.uid, {
@@ -136,6 +157,7 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
                   photoURL: result.user.photoURL,
                 })
               );
+              dispatch(toggleAuthenticationContainer(false));
             }
           }
         );
@@ -156,24 +178,35 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
         zIndex: 100,
       }}
     >
-      <SignInCard
-        forename={forename}
-        forenameChanged={(newValue: string) => setForename(newValue)}
-        surname={surname}
-        surnameChanged={(newValue: string) => setSurname(newValue)}
-        email={email}
-        emailChanged={(newValue: string) => setEmail(newValue)}
-        password={password}
-        passwordChanged={(newValue: string) => setPassword(newValue)}
-        confirmPassword={confirmPassword}
-        confirmPasswordChanged={(newValue: string) =>
-          setConfirmPassword(newValue)
-        }
-        createAnAccount={createAnAccount}
-        createAnAccountChanged={() => setCreateAnAccount((curVal) => !curVal)}
-        submitFormClicked={(e) => submitFormHandler(e)}
-        signInWithGoogleClicked={signInWithGoogle}
-      />
+      <AnimatePresence>
+        <motion.div
+          variants={authenticationCardDropInVariants}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+        >
+          <SignInCard
+            forename={forename}
+            forenameChanged={(newValue: string) => setForename(newValue)}
+            surname={surname}
+            surnameChanged={(newValue: string) => setSurname(newValue)}
+            email={email}
+            emailChanged={(newValue: string) => setEmail(newValue)}
+            password={password}
+            passwordChanged={(newValue: string) => setPassword(newValue)}
+            confirmPassword={confirmPassword}
+            confirmPasswordChanged={(newValue: string) =>
+              setConfirmPassword(newValue)
+            }
+            createAnAccount={createAnAccount}
+            createAnAccountChanged={() =>
+              setCreateAnAccount((curVal) => !curVal)
+            }
+            submitFormClicked={(e) => submitFormHandler(e)}
+            signInWithGoogleClicked={signInWithGoogle}
+          />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
