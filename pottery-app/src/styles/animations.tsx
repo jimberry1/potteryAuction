@@ -12,3 +12,17 @@ export const artPageFadeInVariants = {
     },
   },
 };
+
+export const authenticationCardDropInVariants = {
+  hidden: {
+    y: '-100vh',
+  },
+  visible: {
+    y: 0,
+    transition: {
+      delay: 1,
+      type: 'spring',
+      damping: 20,
+    },
+  },
+};
