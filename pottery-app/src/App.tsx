@@ -11,14 +11,18 @@ import TestPage from './routes/testPage';
 import ResultsPage from './routes/resultsPage';
 import Footer from './components/tailwindComponents/footer';
 import AuthenticationContainer from './containers/authenticationContainer';
-import { userIdStateSelector } from './store/storeUtilities';
+import {
+  adminShowAuthenticationContainerSelector,
+  userIdStateSelector,
+} from './store/storeUtilities';
 
 function App() {
   const userId = useSelector(userIdStateSelector);
+  const showAuth = useSelector(adminShowAuthenticationContainerSelector);
   return (
     <div>
       <Navbar />
-      {/* {!userId && <AuthenticationContainer />} */}
+      {!userId && showAuth && <AuthenticationContainer />}
       <div className="bg-gray-200 flex justify-center min-h-screen overflow-x-hidden pt-20">
         <Switch>
           <Route path="/explore" component={ExplorePage} />

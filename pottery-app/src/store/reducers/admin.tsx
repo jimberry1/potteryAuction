@@ -6,11 +6,23 @@ const initialState: adminStateType = {
   showModal: false,
   modalInformation: { title: '', body: '', actionButtonDescription: '' },
   redirectLink: '',
+  showAuth: false,
 };
 
 const toggleModal = (state: any, action: any) => {
   return updateObject(state, {
     showModal: action?.show ? action.show : !state.showModal,
+  });
+};
+
+const authenticateUser = (state: adminStateType, action: any) => {
+  return updateObject(state, { showAuth: action.showAuth });
+};
+
+const authenticateUserWithRedirect = (state: adminStateType, action: any) => {
+  return updateObject(state, {
+    showAuth: action.showAuth,
+    redirectLink: action.redirectLink,
   });
 };
 
@@ -32,6 +44,10 @@ const adminReducer = (state = initialState, action: any) => {
       return toggleModal(state, action);
     case actionTypes.UPDATE_MODAL_INFORMATION:
       return updateModalInformation(state, action);
+    case actionTypes.AUTHENTICATE_USER:
+      return authenticateUser(state, action);
+    case actionTypes.AUTHENTICATE_AND_REDIRECT_USER:
+      return authenticateUserWithRedirect(state, action);
     default:
       return state;
   }
