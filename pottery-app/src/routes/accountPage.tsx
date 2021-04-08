@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import BoldPageTitle from '../components/boldPageTitle';
 import AccountPageArtistContainer from '../containers/accountContainers/accountPageArtistContainer';
+import PurchasedItemsContainer from '../containers/accountContainers/purchasedItemsContainer';
 import { toggleAuthenticationContainer } from '../store/actions/adminActions';
 import {
   userArtistIdStateSelector,
@@ -32,7 +33,10 @@ const AccountPage: React.SFC<AccountPageProps> = () => {
     return (
       <div>
         {artistId ? (
-          <AccountPageArtistContainer artistId={artistId} />
+          <div>
+            <AccountPageArtistContainer artistId={artistId} />
+            <PurchasedItemsContainer userId={userId} />
+          </div>
         ) : (
           <div>
             <BoldPageTitle
