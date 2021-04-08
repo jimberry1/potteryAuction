@@ -42,9 +42,18 @@ export type auctionType = {
   standardPrice: number;
   auctionType: string;
   sold: boolean;
-  startTimestamp: Firebase.firestore.Timestamp;
-  endTimestamp: Firebase.firestore.Timestamp;
-  timestamp: Firebase.firestore.Timestamp;
+  startTimestamp: Firebase.firestore.Timestamp | null;
+  endTimestamp: Firebase.firestore.Timestamp | null;
+  timestamp: Firebase.firestore.Timestamp | null;
+};
+
+export type completedAuctionType = {
+  artworkId: string;
+  auctionId: string;
+  artistId: string;
+  purchaserId: string;
+  price: number;
+  timestamp: any;
 };
 
 export type artistType = {
