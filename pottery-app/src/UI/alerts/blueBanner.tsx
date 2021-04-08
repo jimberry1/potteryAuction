@@ -24,9 +24,9 @@ const BlueBanner: React.SFC<BlueBannerProps> = ({ messageText }) => {
             <path
               d="M6 18L18 6M6 6L18 18"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>
