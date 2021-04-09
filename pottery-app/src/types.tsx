@@ -32,6 +32,36 @@ export type artworkType = {
   charityURL: string;
   sold: boolean;
   timestamp?: Firebase.firestore.Timestamp;
+  fish: boolean;
+};
+
+export type artworkAuctionType = {
+  // Linking info
+  artistId: string;
+  artistUserId: string;
+  buyerId: string;
+  timestamp: Firebase.firestore.Timestamp | any;
+  // artwork info
+  title: string;
+  description: string;
+  artCategory: string;
+  artMaterials: string[];
+  views: number;
+  photosURL: string[];
+  size: string;
+  // Artist info
+  artistName: string;
+  artistDescription: string;
+  // Charity info
+  charityName: string;
+  charityDescription: string;
+  charityURL: string;
+  // auction info
+  price: number;
+  sold: boolean;
+  auctionType: string;
+  // startTimestamp: Firebase.firestore.Timestamp | null;
+  // endTimestamp: Firebase.firestore.Timestamp | null;
 };
 
 export type auctionType = {
@@ -51,7 +81,7 @@ export type completedAuctionType = {
   artworkId: string;
   auctionId: string;
   artistId: string;
-  purchaserId: string;
+  purchaserId: string; // should be renamed to buyerId
   price: number;
   timestamp: any;
 };
