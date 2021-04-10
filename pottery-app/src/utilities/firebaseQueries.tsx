@@ -1,9 +1,7 @@
 import db from '../firebase';
 import {
   artistType,
-  artworkType,
-  auctionType,
-  completedAuctionType,
+  artworkAuctionType,
   searchStateType,
   userType,
   userTypeForUpdating,
@@ -24,7 +22,7 @@ export const fetchGeneralInfoTableByDocumentId = async (documentId: string) => {
 };
 
 export const addArtworkToArtworkDatabaseTable = async (
-  artwork: artworkType
+  artwork: artworkAuctionType
 ) => {
   return await db.collection(ARTWORK_TABLE).add(artwork);
 };
@@ -33,6 +31,41 @@ export const fetchArtworkByArtworkId = async (artworkId: string) => {
   return await db.collection(ARTWORK_TABLE).doc(artworkId).get();
 };
 
+export const fetchArtworksForArtistIdWithLimit = async (
+  artistId: string,
+  limit: number
+) => {
+  return await db
+    .collection(ARTWORK_TABLE)
+    .where('artistId', '==', artistId)
+    .limit(limit)
+    .get();
+};
+
+export const fetchArtworkSnapshotByArtworkId = async (
+  artworkId: string,
+  setStateCallback: any
+) => {
+  return await db
+    .collection(ARTWORK_TABLE)
+    .doc(artworkId)
+    .onSnapshot((snapshot) => {
+      if (snapshot.exists) {
+        setStateCallback(snapshot.data());
+      }
+    });
+};
+
+export const fetchSoldArtworksByBuyerIdWithLimit = async (
+  buyerId: string,
+  limit: number
+) => {
+  return await db
+    .collection(ARTWORK_TABLE)
+    .where('buyerId', '==', buyerId)
+    .limit(limit)
+    .get();
+};
 export const addViewToArtworkWhenLoaded = (artworkId: string) => {
   db.collection(ARTWORK_TABLE)
     .doc(artworkId)
@@ -77,60 +110,13 @@ export const fetchCompletedAuctionsForArtistWithLimit = async (
     .get();
 };
 
-export const fetchCompletedAuctionsForPurchaserWithLimit = async (
-  purchaserId: string,
-  limit: number
+export const updateArtworkAsSoldForArtworkId = async (
+  artworkId: string,
+  userId: string
 ) => {
-  return await db
-    .collection(COMPLETED_AUCTION_TABLE)
-    .where('purchaserId', '==', purchaserId)
-    .limit(limit)
-    .get();
-};
-
-export const fetchAuctionReferenceByAuctionIdForSnapshot = async (
-  auctionId: string,
-  callback: any
-) => {
-  return await db
-    .collection(AUCTION_TABLE)
-    .doc(auctionId)
-    .onSnapshot((snapshot) => {
-      if (snapshot.exists) {
-        callback({ id: snapshot.id, data: snapshot.data() });
-      }
-    });
-};
-
-export const updateArtworkAsSoldForArtworkId = async (artworkId: string) => {
-  db.collection(ARTWORK_TABLE).doc(artworkId).update({ sold: true });
-};
-
-export const updateAuctionAsSoldForArtworkId = async (auctionId: string) => {
-  db.collection(AUCTION_TABLE).doc(auctionId).update({ sold: true });
-};
-
-export const createCompletedAuctionRecord = async (
-  userId: string,
-  auctionId: string,
-  auction: auctionType
-) => {
-  const completedAuction: completedAuctionType = {
-    purchaserId: userId,
-    artistId: auction.artistId,
-    artworkId: auction.artworkId,
-    price: auction.currentBid,
-    auctionId: auctionId,
-    timestamp: Firebase.firestore.FieldValue.serverTimestamp(),
-  };
-  db.collection(COMPLETED_AUCTION_TABLE).add(completedAuction);
-};
-
-export const addAuctionToFirebase = async (auction: auctionType) => {
-  return db.collection(AUCTION_TABLE).add({
-    ...auction,
-    timestamp: Firebase.firestore.FieldValue.serverTimestamp(),
-  });
+  db.collection(ARTWORK_TABLE)
+    .doc(artworkId)
+    .update({ sold: true, buyerId: userId });
 };
 
 export const addUserToUsers = async (user: userType) => {
@@ -194,3 +180,56 @@ const addSizeFilter = (query: any, size: string) => {
 const addArtTypeFilter = (query: any, artType: string) => {
   return query.where('artCategory', '==', artType);
 };
+
+// Deprecated whilst auction behavior is handled by the artwork itself
+// export const fetchCompletedAuctionsForPurchaserWithLimit = async (
+//   purchaserId: string,
+//   limit: number
+// ) => {
+//   return await db
+//     .collection(COMPLETED_AUCTION_TABLE)
+//     .where('purchaserId', '==', purchaserId)
+//     .limit(limit)
+//     .get();
+// };
+
+// export const fetchAuctionReferenceByAuctionIdForSnapshot = async (
+//   auctionId: string,
+//   callback: any
+// ) => {
+//   return await db
+//     .collection(AUCTION_TABLE)
+//     .doc(auctionId)
+//     .onSnapshot((snapshot) => {
+//       if (snapshot.exists) {
+//         callback({ id: snapshot.id, data: snapshot.data() });
+//       }
+//     });
+// };
+
+// export const updateAuctionAsSoldForArtworkId = async (auctionId: string) => {
+//   db.collection(AUCTION_TABLE).doc(auctionId).update({ sold: true });
+// };
+
+// export const createCompletedAuctionRecord = async (
+//   userId: string,
+//   auctionId: string,
+//   auction: auctionType
+// ) => {
+//   const completedAuction: completedAuctionType = {
+//     purchaserId: userId,
+//     artistId: auction.artistId,
+//     artworkId: auction.artworkId,
+//     price: auction.currentBid,
+//     auctionId: auctionId,
+//     timestamp: Firebase.firestore.FieldValue.serverTimestamp(),
+//   };
+//   db.collection(COMPLETED_AUCTION_TABLE).add(completedAuction);
+// };
+
+// export const addAuctionToFirebase = async (auction: auctionType) => {
+//   return db.collection(AUCTION_TABLE).add({
+//     ...auction,
+//     timestamp: Firebase.firestore.FieldValue.serverTimestamp(),
+//   });
+// };
