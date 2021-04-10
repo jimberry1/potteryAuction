@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { completedAuctionType } from '../../types';
-import { fetchCompletedAuctionsForPurchaserWithLimit } from '../../utilities/firebaseQueries';
+import ArtResultsSet from '../../components/artResultsSet';
+import { artworkAuctionType, completedAuctionType } from '../../types';
+import { fetchSoldArtworksByBuyerIdWithLimit } from '../../utilities/firebaseQueries';
 export interface PurchasedItemsContainerProps {
   userId: string;
 }
 
 interface completedAuctionState {
   id: string;
-  data: completedAuctionType;
+  data: artworkAuctionType;
 }
 
 const PurchasedItemsContainer: React.SFC<PurchasedItemsContainerProps> = ({
@@ -19,7 +20,7 @@ const PurchasedItemsContainer: React.SFC<PurchasedItemsContainerProps> = ({
   >([]);
 
   useEffect(() => {
-    fetchCompletedAuctionsForPurchaserWithLimit(userId, 10).then(
+    fetchSoldArtworksByBuyerIdWithLimit(userId, 10).then(
       (purchasedItemsSnapshot: any) => {
         setCompletedAuctionRecords(
           purchasedItemsSnapshot.docs.map((purchasedItem: any) => ({
@@ -32,14 +33,12 @@ const PurchasedItemsContainer: React.SFC<PurchasedItemsContainerProps> = ({
   }, [userId]);
   return (
     <div>
-      {completedAuctionRecords &&
-        completedAuctionRecords.map((item) => {
-          return (
-            <div className="flex p-4 mt-2" key={item.id}>
-              {item.data.artworkId}
-            </div>
-          );
-        })}
+      {completedAuctionRecords && (
+        <ArtResultsSet
+          artworks={completedAuctionRecords}
+          title="Purchased items"
+        />
+      )}
     </div>
   );
 };
