@@ -1,8 +1,11 @@
 import { TailwindNavbar } from 'tailwind-navbar-react';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { toggleAuthenticationContainer } from '../store/actions/adminActions';
 
-const Navbar = () => {
+const Navbar = ({ isAdmin }) => {
   const history = useHistory();
+  // const dispatch = useDispatch();
   return (
     <TailwindNavbar
       brand={
@@ -25,6 +28,15 @@ const Navbar = () => {
               Home
             </a>
           </li>
+          {/* <li>
+            <button
+              onClick={() => {
+                localStorage.removeItem('caf_uid');
+              }}
+            >
+              ResetUid
+            </button>
+          </li> */}
           <li>
             <div
               className="block px-0 py-3 border-b-2 border-transparent lg:p-4 hover:border-indigo-400"
@@ -43,6 +55,26 @@ const Navbar = () => {
               Account
             </div>
           </li>
+          {isAdmin && (
+            <li>
+              <div
+                className="block px-0 py-3 border-b-2 border-transparent lg:p-4 hover:border-indigo-400"
+                //   href="/account"
+                onClick={() => history.push('/manageArtistProfile')}
+              >
+                Artist Profile
+              </div>
+            </li>
+          )}
+          {/* <li>
+            <div
+              className="block px-0 py-3 border-b-2 border-transparent lg:p-4 hover:border-indigo-400"
+              //   href="/account"
+              onClick={() => dispatch(toggleAuthenticationContainer(true))}
+            >
+              Auth
+            </div>
+          </li> */}
         </ul>
       </nav>
     </TailwindNavbar>

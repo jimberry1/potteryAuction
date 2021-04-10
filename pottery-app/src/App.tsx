@@ -14,6 +14,7 @@ import AuthenticationContainer from './containers/authenicationContainers/authen
 import {
   adminShowAuthenticationContainerSelector,
   userIdStateSelector,
+  userIsAdminStateSelector,
 } from './store/storeUtilities';
 import CreateArtistProfilePage from './routes/createArtistProfilePage';
 import ManageArtistProfile from './routes/manageArtistProfilePage';
@@ -22,9 +23,10 @@ import AdminPage from './routes/adminPage';
 function App() {
   const userId = useSelector(userIdStateSelector);
   const showAuth = useSelector(adminShowAuthenticationContainerSelector);
+  const isAdmin = useSelector(userIsAdminStateSelector);
   return (
     <div>
-      <Navbar />
+      <Navbar isAdmin={isAdmin} />
       {!userId && showAuth && <AuthenticationContainer />}
       <div className="bg-gray-200 flex justify-center min-h-screen overflow-x-hidden pt-20">
         <Switch>

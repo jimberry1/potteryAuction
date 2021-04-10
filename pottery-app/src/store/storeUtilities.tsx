@@ -17,4 +17,6 @@ export const adminShowAuthenticationContainerSelector = (
 export const userStateSelector = (state: RootStateOrAny) => state.user;
 export const userIdStateSelector = (state: RootStateOrAny) => state.user.userId;
 export const userArtistIdStateSelector = (state: RootStateOrAny) =>
-  state.user.user.artistUid;
+  state.user.user.artistId;
+export const userIsAdminStateSelector = (state: RootStateOrAny) =>
+  state.user.user.isAdmin;
