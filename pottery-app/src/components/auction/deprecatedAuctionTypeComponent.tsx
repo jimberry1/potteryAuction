@@ -4,7 +4,7 @@ export interface BasicAuctionComponentProps {
   auction: auctionType;
 }
 
-const BasicAuctionComponent: React.FunctionComponent<BasicAuctionComponentProps> = ({
+const deprecatedAuctionTypeComponent: React.FunctionComponent<BasicAuctionComponentProps> = ({
   auction,
 }) => {
   return (
@@ -31,4 +31,4 @@ const BasicAuctionComponent: React.FunctionComponent<BasicAuctionComponentProps>
   );
 };
 
-export default BasicAuctionComponent;
+export default deprecatedAuctionTypeComponent;
