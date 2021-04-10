@@ -8,7 +8,7 @@ const initialState: userStateType = {
     forename: '',
     surname: '',
     emailAddress: '',
-    artistUid: '',
+    artistId: '',
     isAdmin: false,
     timestamp: null,
     photoURL: '',
@@ -22,10 +22,18 @@ const setUser = (state: userStateType, action: any) => {
   });
 };
 
+const updateUserStateWithArtistId = (state: userStateType, action: any) => {
+  return updateObject(state, {
+    user: { ...action.user, artistId: action.artistId },
+  });
+};
+
 const userReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case actionTypes.SET_USER:
       return setUser(state, action);
+    case actionTypes.SET_ARTIST_ID:
+      return updateUserStateWithArtistId(state, action);
     default:
       return state;
   }

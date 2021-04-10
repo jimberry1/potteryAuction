@@ -1,6 +1,6 @@
 // User types
 export const SET_USER = 'SET_USER';
-
+export const SET_ARTIST_ID = 'SET_ARTIST_ID';
 // Search filters
 export const SET_PRICE_FILTER = 'SET_PRICE_FILTER';
 export const SET_MATERIAL_FILTER = 'SET_MATERIAL_FILTER';

@@ -15,3 +15,7 @@ export const setUserFromFirebaseUserSnapshot = (
     user: userSnapshot.data(),
   };
 };
+
+export const setArtistIdOnUser = (artistId: string) => {
+  return { type: actions.SET_ARTIST_ID, artistId: artistId };
+};
