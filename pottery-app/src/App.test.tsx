@@ -24,6 +24,8 @@ test('renders learn react link', () => {
  * - Artist bio
  * - artworks
  *
+ * -- Need to create components to display your own art and allow for details to be changed and edited
+ *
  * 2) Improve the art display page to have navigatable sections for artist information and charity partner
  * this requires an enhancement to the artwork datatype
  *
@@ -67,4 +69,17 @@ test('renders learn react link', () => {
  * - Search functionality requires indexing
  * - Payments require Stripe
  *
+ */
+
+/**
+ *
+ * Updated plan for today
+ *
+ * -- create new CreateArtistProfile page and create a form to allow the submission of artist information
+ *
+ * -- Add Admin page to manage pending artist profile requests // Later down the line this will contain functionality for removing active artists
+ *
+ * -- Add Artist Profile management page to manage artist profile, see current auctions and sales
+ *
+ * -- Add charities DB table and create a custom component for displaying charities // Later we will add ability to add and manage charities on the admin page
  */

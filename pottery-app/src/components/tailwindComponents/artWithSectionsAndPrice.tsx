@@ -67,9 +67,12 @@ const ArtWithSectionsAndPrice: React.FunctionComponent<ArtWithSectionsAndPricePr
         >
           <img
             alt="ecommerce"
-            className="lg:w-1/3 w-full lg:h-auto h-64 object-cover object-center rounded"
+            className={`lg:w-1/3 w-full lg:h-auto h-64 object-cover object-center rounded transition duration-500 ${
+              artwork.sold ? 'opacity-50 hover:opacity-100' : ''
+            }`}
             src={artwork.photosURL[0]}
           />
+
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mb-6 lg:mb-0">
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">
               {artwork.title}
@@ -110,9 +113,14 @@ const ArtWithSectionsAndPrice: React.FunctionComponent<ArtWithSectionsAndPricePr
             {!artwork.sold && (
               <AuctionSubSection price={artwork.price} clicked={buyClicked} />
             )}
-            {artwork.sold && artwork?.buyerId === userId && (
-              <div>
+            {artwork.sold && userId && artwork?.buyerId === userId && (
+              <div style={{ color: 'red', textAlign: 'center' }}>
                 <p>You have successfully purchased this item!</p>
+              </div>
+            )}
+            {artwork.sold && (!userId || artwork?.buyerId !== userId) && (
+              <div style={{ color: 'red', textAlign: 'center' }}>
+                <p>This item has already been sold.</p>
               </div>
             )}
           </div>

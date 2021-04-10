@@ -5,7 +5,7 @@ import {
 } from '../../utilities/utilityFunctions';
 
 export interface ArtCardProps {
-  artwork?: artworkAuctionType;
+  artwork: artworkAuctionType;
   artworkId: string;
 }
 
