@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import ArtSearchResultContainer from '../containers/artSearchResult/artSearchResultContainer';
+import ArtSearchResultContainer from '../containers/resultsContainers/artSearchResult/artSearchResultContainer';
 import { useLocation } from 'react-router';
-import ArtistSearchResultContainer from '../containers/artistSearchResult/artistSearchResultContainer';
+import ArtistSearchResultContainer from '../containers/resultsContainers/artistSearchResult/artistSearchResultContainer';
 export interface ResultsPageProps {}
 
 const ResultsPage: React.SFC<ResultsPageProps> = () => {

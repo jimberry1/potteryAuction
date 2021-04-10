@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { createCustomArtQuery } from '../../utilities/firebaseQueries';
+import { createCustomArtQuery } from '../../../utilities/firebaseQueries';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import ArtResultsSet from '../../components/artResultsSet';
-import { searchStateSelector } from '../../store/storeUtilities';
+import ArtResultsSet from '../../../components/artResultsSet';
+import { searchStateSelector } from '../../../store/storeUtilities';
 export interface TestGenericArtContainerProps {
   artQuery?: any;
 }

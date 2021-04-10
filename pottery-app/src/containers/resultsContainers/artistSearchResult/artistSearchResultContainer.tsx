@@ -1,5 +1,5 @@
-import SearchFilterBar from '../../components/searchFilterBar';
-import { artSearchFilterFields } from '../../configuration/potFilterFields';
+import SearchFilterBar from '../../../components/searchFilterBar';
+import { artSearchFilterFields } from '../../../configuration/potFilterFields';
 import ArtistSearchResultsDisplay from './artistSearchResultsDisplay';
 // import {artis}
 export interface ArtistSearchResultContainerProps {}

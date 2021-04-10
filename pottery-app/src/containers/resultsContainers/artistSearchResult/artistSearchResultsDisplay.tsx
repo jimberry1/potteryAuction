@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { fetchArtistsWithLimit } from '../../utilities/firebaseQueries';
+import { fetchArtistsWithLimit } from '../../../utilities/firebaseQueries';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import ArtistResultsSet from '../../components/artistResultsSet';
-import { searchStateSelector } from '../../store/storeUtilities';
+import ArtistResultsSet from '../../../components/artistResultsSet';
+import { searchStateSelector } from '../../../store/storeUtilities';
 
 export interface ArtistSearchResultsDisplayProps {}
 
