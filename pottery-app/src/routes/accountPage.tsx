@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import BoldPageTitle from '../components/boldPageTitle';
-import AccountPageArtistContainer from '../containers/accountContainers/accountPageArtistContainer';
+import ManageArtistProfileContainer from '../containers/artistContainers/manageArtistProfileContainer';
 import PurchasedItemsContainer from '../containers/accountContainers/purchasedItemsContainer';
 import { toggleAuthenticationContainer } from '../store/actions/adminActions';
 import {
@@ -8,14 +8,13 @@ import {
   userIdStateSelector,
 } from '../store/storeUtilities';
 import PurpleButton from '../UI/buttons/purpleButton';
+import PageLoaderHoc from '../utilities/hoc/pageLoaderHoc';
 export interface AccountPageProps {}
 
 const AccountPage: React.SFC<AccountPageProps> = () => {
   const userId = useSelector(userIdStateSelector);
-  const artistId = useSelector(userArtistIdStateSelector);
   const dispatch = useDispatch();
 
-  console.log(artistId);
   if (!userId) {
     return (
       <div>
@@ -32,20 +31,9 @@ const AccountPage: React.SFC<AccountPageProps> = () => {
   } else
     return (
       <div>
-        {artistId ? (
-          <div>
-            <AccountPageArtistContainer artistId={artistId} />
-            <PurchasedItemsContainer userId={userId} />
-          </div>
-        ) : (
-          <div>
-            <BoldPageTitle
-              title="Create an artist profile"
-              subtitle="In order to sell wares on this site you need to register an artist profile. Click the button below to get started. Please note that before sales can begin your account will need to be approved by an admin."
-            />
-            <PurpleButton buttonText="Create profile" clicked={() => {}} />
-          </div>
-        )}
+        <PageLoaderHoc loading={userId ? false : true}>
+          <PurchasedItemsContainer userId={userId} />
+        </PageLoaderHoc>
       </div>
     );
 };
