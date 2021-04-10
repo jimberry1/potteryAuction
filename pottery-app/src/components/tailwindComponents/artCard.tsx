@@ -1,11 +1,11 @@
-import { artworkType } from '../../types';
+import { artworkAuctionType, artworkType } from '../../types';
 import {
   formatItemDescriptionForCard,
   formatItemTitleForCard,
 } from '../../utilities/utilityFunctions';
 
 export interface ArtCardProps {
-  artwork?: artworkType;
+  artwork?: artworkAuctionType;
   artworkId: string;
 }
 
