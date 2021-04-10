@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
-import ArtResultsSet from '../../components/artResultsSet';
 import TestTailwindProfile from '../../components/tailwindComponents/testTailwindProfile';
 import {
   fetchArtForArtistIdWithLimit,
   fetchArtistByArtistId,
 } from '../../utilities/firebaseQueries';
 import { generateArtistStatsFromArtworkArray } from '../../utilities/utilityFunctions';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-export interface AccountPageArtistContainerProps {
+
+export interface ManageArtistProfileContainerProps {
   artistId: string;
 }
 
-const AccountPageArtistContainer: React.SFC<AccountPageArtistContainerProps> = ({
+const ManageArtistProfileContainer: React.SFC<ManageArtistProfileContainerProps> = ({
   artistId,
 }) => {
   const [artist, setArtist] = useState({
@@ -23,6 +22,11 @@ const AccountPageArtistContainer: React.SFC<AccountPageArtistContainerProps> = (
       profileDescription: '',
       photoURL: '',
       location: '',
+      isApproved: true,
+      isSuspended: false,
+      charityId: '',
+      charityName: '',
+      charityDonationPercentage: -1,
     },
   });
   const [artistArtwork, setArtistArtwork]: any = useState([]);
@@ -59,22 +63,8 @@ const AccountPageArtistContainer: React.SFC<AccountPageArtistContainerProps> = (
           artworkStats={generateArtistStatsFromArtworkArray(artistArtwork)}
         />
       )}
-      {artistArtwork[0] && (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
-          <ArtResultsSet artworks={artistArtwork} title="My Artwork" />
-
-          <AiOutlinePlusCircle size={50} style={{ marginBottom: 10 }} />
-        </div>
-      )}
     </div>
   );
 };
 
-export default AccountPageArtistContainer;
+export default ManageArtistProfileContainer;
