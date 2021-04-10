@@ -15,6 +15,8 @@ import {
   adminShowAuthenticationContainerSelector,
   userIdStateSelector,
 } from './store/storeUtilities';
+import CreateArtistPrfoilePage from './routes/createArtistProfilePage';
+import ManageArtistProfile from './routes/manageArtistProfilePage';
 
 function App() {
   const userId = useSelector(userIdStateSelector);
@@ -30,6 +32,11 @@ function App() {
           <Route path="/artist" component={ArtistPage} />
           <Route path="/account" component={AccountPage} />
           <Route path="/results" component={ResultsPage} />
+          <Route
+            path="/createArtistProfile"
+            component={CreateArtistPrfoilePage}
+          />
+          <Route path="/manageArtistProfile" component={ManageArtistProfile} />
           <Route path="/test" component={TestPage} />
           <Route path="/" component={LandingPage} />
         </Switch>
