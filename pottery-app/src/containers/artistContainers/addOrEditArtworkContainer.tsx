@@ -1,10 +1,19 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import AddOrUpdateArtworkForm from '../../components/forms/addOrUpdateArtworkForm';
+import ArtCard from '../../components/tailwindComponents/artCard';
+import { BUYOUT_AUCTION_TYPE } from '../../configuration/staticVariableNames/databaseTableAndFieldNames';
 
-import { artworkType } from '../../types';
+import { artworkAuctionType, artworkType } from '../../types';
+import {
+  addArtworkToArtworkDatabaseTable,
+  fetchArtworkByArtworkId,
+} from '../../utilities/firebaseQueries';
 
 export interface AddOrEditArtworkContainerProps {
-  artwork?: { id: string; data: artworkType };
+  selectedArtworkId: string;
+  artistId: string;
+  userId: string;
 }
 
 /**
@@ -13,29 +22,81 @@ export interface AddOrEditArtworkContainerProps {
  * display blank fields that are required for the addition of an artwork piece. The container will also handle the submission of data to firebase.
  */
 const AddOrEditArtworkContainer: React.SFC<AddOrEditArtworkContainerProps> = ({
-  artwork,
+  selectedArtworkId,
+  artistId,
+  userId,
 }) => {
-  const [title, setTitle] = useState(artwork?.data?.title || '');
-  const [description, setDescription] = useState(
-    artwork?.data?.description || ''
-  );
-  const [artCategory, setArtCategory] = useState(
-    artwork?.data?.artCategory || ''
-  );
-  const [size, setSize] = useState(artwork?.data?.size || '');
-  const [charityName, setCharityName] = useState(
-    artwork?.data?.charityName || ''
-  );
-  const [charityURL, setCharityURL] = useState(artwork?.data?.charityURL || '');
-  const [charityDescription, setCharityDescription] = useState(
-    artwork?.data?.charityDescription || ''
-  );
-  const [artMaterials, setArtMaterials] = useState(artwork?.data?.title || []);
+  const [artwork, setArtwork] = useState<artworkAuctionType>({
+    artistId: artistId,
+    artistUserId: userId,
+    buyerId: '',
+    timestamp: null,
+    // artwork info
+    title: '',
+    description: '',
+    artCategory: '',
+    artMaterials: [],
+    views: 0,
+    photosURL: ['https://source.unsplash.com/random'], // TODO FIX THIS
+    size: '',
+    // Artist info
+    artistName: '',
+    artistDescription: '',
+    // Charity info
+    charityName: '',
+    charityDescription: '',
+    charityURL: '',
+    // auction info
+    price: 0,
+    sold: false,
+    auctionType: BUYOUT_AUCTION_TYPE,
+  });
 
-  console.log(artwork);
-  console.log('This is the title' + title);
+  const addNewArtworkToCollection = () => {
+    addArtworkToArtworkDatabaseTable(artwork);
+  };
 
-  return <div></div>;
+  useEffect(() => {
+    if (selectedArtworkId) {
+      fetchArtworkByArtworkId(selectedArtworkId).then((artwork: any) => {
+        if (artwork.exists) {
+          setArtwork(artwork.data());
+        }
+      });
+    }
+  }, [artistId, userId, selectedArtworkId]);
+  return (
+    <div>
+      {/* <ArtCard artwork={artwork} artworkId={selectedArtworkId} /> */}
+      <AddOrUpdateArtworkForm
+        artworkAuction={artwork}
+        titleChanged={(newVal: string) =>
+          setArtwork((artwork) => ({ ...artwork, title: newVal }))
+        }
+        descriptionChanged={(newVal: string) =>
+          setArtwork((artwork) => ({ ...artwork, description: newVal }))
+        }
+        categoryChanged={(newVal: string) =>
+          setArtwork((artwork) => ({ ...artwork, artCategory: newVal }))
+        }
+        materialsChanged={(newVal: string) =>
+          setArtwork((artwork) => ({
+            ...artwork,
+            artMaterials: artwork.artMaterials.concat(newVal),
+          }))
+        }
+        priceChanged={(newVal: number) =>
+          setArtwork((artwork) => ({ ...artwork, price: newVal }))
+        }
+        sizeChanged={(newVal: string) =>
+          setArtwork((artwork) => ({ ...artwork, size: newVal }))
+        }
+        submitArtworkClicked={() => {
+          console.log('I have been called');
+        }}
+      />
+    </div>
+  );
 };
 
 export default AddOrEditArtworkContainer;
