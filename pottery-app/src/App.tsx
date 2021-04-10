@@ -15,7 +15,7 @@ import {
   adminShowAuthenticationContainerSelector,
   userIdStateSelector,
 } from './store/storeUtilities';
-import CreateArtistPrfoilePage from './routes/createArtistProfilePage';
+import CreateArtistProfilePage from './routes/createArtistProfilePage';
 import ManageArtistProfile from './routes/manageArtistProfilePage';
 import AdminPage from './routes/adminPage';
 
@@ -36,7 +36,7 @@ function App() {
           <Route path="/admin" component={AdminPage} />
           <Route
             path="/createArtistProfile"
-            component={CreateArtistPrfoilePage}
+            component={CreateArtistProfilePage}
           />
           <Route path="/manageArtistProfile" component={ManageArtistProfile} />
           <Route path="/test" component={TestPage} />
