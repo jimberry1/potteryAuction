@@ -3,7 +3,7 @@ export type userType = {
   forename: string;
   surname: string;
   emailAddress: string;
-  artistUid: string;
+  artistId: string;
   isAdmin: boolean;
   timestamp: Firebase.firestore.Timestamp | null;
   photoURL?: string;
@@ -20,7 +20,7 @@ export type artworkType = {
   title: string;
   description: string;
   artistName: string;
-  artistUid: string;
+  artistId: string;
   auctionId: string;
   artCategory: string;
   artMaterials: string[];
@@ -94,6 +94,19 @@ export type artistType = {
   photoURL: string;
   location: string;
   timestamp?: Firebase.firestore.Timestamp;
+  isApproved: boolean;
+  isSuspended: boolean;
+
+  charityId: string;
+  charityName: string;
+  charityDonationPercentage: number;
+};
+
+export type charityType = {
+  charityName: string;
+  charityDescription: string;
+  charityURL: string;
+  charityLogoURL: string;
 };
 
 // Reducer state profiles
