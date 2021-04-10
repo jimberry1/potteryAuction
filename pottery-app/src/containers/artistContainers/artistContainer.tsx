@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import ArtResultsSet from '../components/artResultsSet';
-import TestTailwindProfile from '../components/tailwindComponents/testTailwindProfile';
-import TestArtistDisplay from '../components/testArtistDisplay';
-import { ArtContainer } from '../styles/genericStyles';
-import { ArtistProfileArtworkStatistics } from '../types';
+import ArtResultsSet from '../../components/artResultsSet';
+import TestTailwindProfile from '../../components/tailwindComponents/testTailwindProfile';
+import TestArtistDisplay from '../../components/testArtistDisplay';
+import { ArtContainer } from '../../styles/genericStyles';
+import { ArtistProfileArtworkStatistics } from '../../types';
 import {
   fetchArtForArtistIdWithLimit,
   fetchArtistByArtistId,
-} from '../utilities/firebaseQueries';
-import { generateArtistStatsFromArtworkArray } from '../utilities/utilityFunctions';
+} from '../../utilities/firebaseQueries';
+import { generateArtistStatsFromArtworkArray } from '../../utilities/utilityFunctions';
 
 export interface ArtistContainerProps {
   artistId: string;

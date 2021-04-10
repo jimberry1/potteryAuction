@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import SignInCard from '../components/tailwindComponents/SignInCard';
-import { auth, provider } from '../firebase';
+import SignInCard from '../../components/tailwindComponents/SignInCard';
+import { auth, provider } from '../../firebase';
 import firebase from 'firebase';
 import {
   fetchUserByUserId,
   updateUserInformationForUserId,
-} from '../utilities/firebaseQueries';
+} from '../../utilities/firebaseQueries';
 import {
   setUser,
   setUserFromFirebaseUserSnapshot,
-} from '../store/actions/userActions';
-import { userType } from '../types';
-import { LOCAL_STORAGE_ID_KEY } from '../configuration/staticVariableNames/databaseTableAndFieldNames';
+} from '../../store/actions/userActions';
+import { userType } from '../../types';
+import { LOCAL_STORAGE_ID_KEY } from '../../configuration/staticVariableNames/databaseTableAndFieldNames';
 import { AnimatePresence, motion } from 'framer-motion';
-import { authenticationCardDropInVariants } from '../styles/animations';
-import { toggleAuthenticationContainer } from '../store/actions/adminActions';
+import { authenticationCardDropInVariants } from '../../styles/animations';
+import { toggleAuthenticationContainer } from '../../store/actions/adminActions';
 
 export interface AuthenticationContainerProps {}
 

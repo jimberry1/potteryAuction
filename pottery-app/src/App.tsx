@@ -10,7 +10,7 @@ import AccountPage from './routes/accountPage';
 import TestPage from './routes/testPage';
 import ResultsPage from './routes/resultsPage';
 import Footer from './components/tailwindComponents/footer';
-import AuthenticationContainer from './containers/authenticationContainer';
+import AuthenticationContainer from './containers/authenicationContainers/authenticationContainer';
 import {
   adminShowAuthenticationContainerSelector,
   userIdStateSelector,
