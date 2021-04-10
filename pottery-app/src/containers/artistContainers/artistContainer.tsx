@@ -24,6 +24,11 @@ const ArtistContainer: React.SFC<ArtistContainerProps> = ({ artistId }) => {
       profileDescription: '',
       photoURL: '',
       location: '',
+      isApproved: true,
+      isSuspended: false,
+      charityId: '',
+      charityName: '',
+      charityDonationPercentage: -1,
     },
   });
   const [artistArtwork, setArtistArtwork]: any = useState([]);
