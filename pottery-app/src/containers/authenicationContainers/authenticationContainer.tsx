@@ -70,7 +70,7 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
               emailAddress: email,
               isAdmin: false,
               timestamp: null,
-              artistUid: '',
+              artistId: '',
             };
             updateUserInformationForUserId(result.user.uid, userInformation);
             dispatch(setUser(result.user.uid, userInformation));
@@ -103,7 +103,7 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
                 surname: surname,
                 emailAddress: email,
                 isAdmin: false,
-                artistUid: '',
+                artistId: '',
                 timestamp: null,
                 photoURL: '',
               };
@@ -138,7 +138,7 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
                 forename: result.additionalUserInfo.profile.given_name,
                 surname: result.additionalUserInfo.profile.family_name,
                 emailAddress: result.user.email,
-                artistUid: '',
+                artistId: '',
                 isAdmin: false,
                 timestamp: null,
                 photoURL: result.user.photoURL,
@@ -151,7 +151,7 @@ const AuthenticationContainer: React.SFC<AuthenticationContainerProps> = () => {
                   forename: result?.additionalUserInfo?.profile?.given_name,
                   surname: result?.additionalUserInfo?.profile?.family_name,
                   emailAddress: result.user.email,
-                  artistUid: '',
+                  artistId: '',
                   isAdmin: false,
                   timestamp: null,
                   photoURL: result.user.photoURL,
