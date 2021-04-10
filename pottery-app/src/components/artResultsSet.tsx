@@ -1,9 +1,9 @@
 import { ArtContainer } from '../styles/genericStyles';
-import { artworkType } from '../types';
+import { artworkAuctionType, artworkType } from '../types';
 import ArtCard from './tailwindComponents/artCard';
 
 export interface ArtResultsSetProps {
-  artworks: { id: string; data: artworkType }[];
+  artworks: { id: string; data: artworkAuctionType }[];
   title?: string;
 }
 
@@ -16,7 +16,7 @@ const ArtResultsSet: React.SFC<ArtResultsSetProps> = ({ artworks, title }) => {
         </h2>
       )}
       <ArtContainer>
-        {artworks.map((artwork: { id: string; data: artworkType }) => {
+        {artworks.map((artwork: { id: string; data: artworkAuctionType }) => {
           return (
             <ArtCard
               artworkId={artwork.id}
